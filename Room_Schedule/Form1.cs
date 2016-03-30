@@ -27,5 +27,10 @@ namespace Room_Schedule
             Form2 frm = new Form2();
             frm.Show();
         }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
