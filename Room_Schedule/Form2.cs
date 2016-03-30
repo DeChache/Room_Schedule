@@ -24,8 +24,8 @@ namespace Room_Schedule
 
         private void button1_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("The selected date is " + dateTimePicker1.Value.Date);
-            MessageBox.Show("The slected time is " + dateTimePicker1.Value.TimeOfDay);
+            MessageBox.Show("The selected date is " + dateTimePicker1.Value.Month + dateTimePicker1.Value.Day);
+            MessageBox.Show("The slected time is " + dateTimePicker2.Value.Hour + dateTimePicker2.Value.Minute);
         }
 
 
