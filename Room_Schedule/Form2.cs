@@ -24,12 +24,13 @@ namespace Room_Schedule
 
         private void button1_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("The selected date is " + dateTimePicker1.Value.Month + dateTimePicker1.Value.Day);
-            MessageBox.Show("The slected time is " + dateTimePicker2.Value.Hour + dateTimePicker2.Value.Minute);
-            MessageBox.Show("The Selected Room is " + checkedListBox1.SelectedValue);
-            MessageBox.Show("The Value of Box 1 is " + this.textBox1.Text);
-            MessageBox.Show("The Value of Box 2 is " + this.textBox2.Text);
-            MessageBox.Show("The Value of Box 3 is " + this.textBox3.Text);
+            MessageBox.Show("The selected date is " + dateTimePicker1.Value.Month + "/" + dateTimePicker1.Value.Day + "/" 
+            + dateTimePicker1.Value.Year +
+            " The slected time is " + dateTimePicker2.Value.Hour + ":" + dateTimePicker2.Value.Minute +
+            " The Selected Room is " + checkedListBox1.Items +
+            " The Value of Box 1 is " + this.textBox1.Text +
+            " The Value of Box 2 is " + this.textBox2.Text +
+            " The Value of Box 3 is " + this.textBox3.Text);
         }
 
 
