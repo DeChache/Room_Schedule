@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.button1 = new System.Windows.Forms.Button();
@@ -38,22 +37,15 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.Room1 = new System.Windows.Forms.RadioButton();
+            this.s = new System.Windows.Forms.RadioButton();
+            this.Room3 = new System.Windows.Forms.RadioButton();
+            this.Room4 = new System.Windows.Forms.RadioButton();
+            this.Room5 = new System.Windows.Forms.RadioButton();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.menuStrip1.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // checkedListBox1
-            // 
-            this.checkedListBox1.FormattingEnabled = true;
-            this.checkedListBox1.Items.AddRange(new object[] {
-            "Room 1",
-            "Room 2",
-            "Room 3",
-            "Room 4",
-            "Room 5"});
-            this.checkedListBox1.Location = new System.Drawing.Point(75, 114);
-            this.checkedListBox1.Name = "checkedListBox1";
-            this.checkedListBox1.Size = new System.Drawing.Size(200, 124);
-            this.checkedListBox1.TabIndex = 0;
             // 
             // dateTimePicker1
             // 
@@ -130,32 +122,103 @@
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
+            // Room1
+            // 
+            this.Room1.AutoSize = true;
+            this.Room1.Location = new System.Drawing.Point(3, 19);
+            this.Room1.Name = "Room1";
+            this.Room1.Size = new System.Drawing.Size(62, 17);
+            this.Room1.TabIndex = 8;
+            this.Room1.TabStop = true;
+            this.Room1.Text = "Room 1";
+            this.Room1.UseVisualStyleBackColor = true;
+            // 
+            // s
+            // 
+            this.s.AutoSize = true;
+            this.s.Location = new System.Drawing.Point(3, 42);
+            this.s.Name = "s";
+            this.s.Size = new System.Drawing.Size(62, 17);
+            this.s.TabIndex = 9;
+            this.s.TabStop = true;
+            this.s.Text = "Room 2";
+            this.s.UseVisualStyleBackColor = true;
+            this.s.CheckedChanged += new System.EventHandler(this.room2_CheckedChanged);
+            // 
+            // Room3
+            // 
+            this.Room3.AutoSize = true;
+            this.Room3.Location = new System.Drawing.Point(3, 65);
+            this.Room3.Name = "Room3";
+            this.Room3.Size = new System.Drawing.Size(62, 17);
+            this.Room3.TabIndex = 10;
+            this.Room3.TabStop = true;
+            this.Room3.Text = "Room 3";
+            this.Room3.UseVisualStyleBackColor = true;
+            // 
+            // Room4
+            // 
+            this.Room4.AutoSize = true;
+            this.Room4.Location = new System.Drawing.Point(3, 88);
+            this.Room4.Name = "Room4";
+            this.Room4.Size = new System.Drawing.Size(62, 17);
+            this.Room4.TabIndex = 11;
+            this.Room4.TabStop = true;
+            this.Room4.Text = "Room 4";
+            this.Room4.UseVisualStyleBackColor = true;
+            // 
+            // Room5
+            // 
+            this.Room5.AutoSize = true;
+            this.Room5.Location = new System.Drawing.Point(3, 111);
+            this.Room5.Name = "Room5";
+            this.Room5.Size = new System.Drawing.Size(62, 17);
+            this.Room5.TabIndex = 12;
+            this.Room5.TabStop = true;
+            this.Room5.Text = "Room 5";
+            this.Room5.UseVisualStyleBackColor = true;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.Room1);
+            this.groupBox1.Controls.Add(this.Room5);
+            this.groupBox1.Controls.Add(this.s);
+            this.groupBox1.Controls.Add(this.Room4);
+            this.groupBox1.Controls.Add(this.Room3);
+            this.groupBox1.Location = new System.Drawing.Point(75, 113);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(200, 139);
+            this.groupBox1.TabIndex = 13;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(352, 529);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.dateTimePicker2);
             this.Controls.Add(this.dateTimePicker1);
-            this.Controls.Add(this.checkedListBox1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form2";
             this.Text = "Form2";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.CheckedListBox checkedListBox1;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.DateTimePicker dateTimePicker2;
         private System.Windows.Forms.Button button1;
@@ -165,5 +228,11 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+        private System.Windows.Forms.RadioButton Room1;
+        private System.Windows.Forms.RadioButton s;
+        private System.Windows.Forms.RadioButton Room3;
+        private System.Windows.Forms.RadioButton Room4;
+        private System.Windows.Forms.RadioButton Room5;
+        private System.Windows.Forms.GroupBox groupBox1;
     }
 }

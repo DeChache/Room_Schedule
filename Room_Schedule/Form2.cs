@@ -24,15 +24,26 @@ namespace Room_Schedule
 
         private void button1_Click(object sender, EventArgs e)
         {
+            var checkedButton = groupBox1.Controls.OfType<RadioButton>()
+                                      .FirstOrDefault(r => r.Checked);
+
             MessageBox.Show("The selected date is " + dateTimePicker1.Value.Month + "/" + dateTimePicker1.Value.Day + "/" 
             + dateTimePicker1.Value.Year +
-            " The slected time is " + dateTimePicker2.Value.Hour + ":" + dateTimePicker2.Value.Minute +
-            " The Selected Room is " + checkedListBox1.Items +
+            " The selcted time is " + dateTimePicker2.Value.Hour + ":" + dateTimePicker2.Value.Minute +
+            " The selected room is " + checkedButton.Name +
             " The Value of Box 1 is " + this.textBox1.Text +
             " The Value of Box 2 is " + this.textBox2.Text +
             " The Value of Box 3 is " + this.textBox3.Text);
         }
 
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
 
+        }
+
+        private void room2_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
