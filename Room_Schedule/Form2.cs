@@ -45,5 +45,10 @@ namespace Room_Schedule
         {
 
         }
+
+        private void Scheduling_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
