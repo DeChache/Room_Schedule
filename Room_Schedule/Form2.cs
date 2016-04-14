@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SQLite;
 
 namespace Room_Schedule
 {
@@ -15,6 +16,9 @@ namespace Room_Schedule
         public Form2()
         {
             InitializeComponent();
+            SQLiteConnection m_dbConnection;
+            m_dbConnection = new SQLiteConnection("Data Source=room_schedule.db;Version=3;");
+            m_dbConnection.Open();
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
