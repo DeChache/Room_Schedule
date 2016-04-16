@@ -8,3 +8,5 @@ c:\users\johnscod_admin\documents\visual studio 2015\Projects\Room_Schedule\Room
 c:\users\johnscod_admin\documents\visual studio 2015\Projects\Room_Schedule\Room_Schedule\obj\Debug\Room_Schedule.csproj.GenerateResource.Cache
 c:\users\johnscod_admin\documents\visual studio 2015\Projects\Room_Schedule\Room_Schedule\obj\Debug\Room_Schedule.exe
 c:\users\johnscod_admin\documents\visual studio 2015\Projects\Room_Schedule\Room_Schedule\obj\Debug\Room_Schedule.pdb
+C:\Users\johnscod_admin\documents\visual studio 2015\Projects\Room_Schedule\Room_Schedule\bin\Debug\System.Data.SQLite.dll
+C:\Users\johnscod_admin\documents\visual studio 2015\Projects\Room_Schedule\Room_Schedule\bin\Debug\System.Data.SQLite.pdb
