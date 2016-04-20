@@ -9,3 +9,4 @@ C:\Users\johnscod_admin\documents\visual studio 2015\Projects\Room_Schedule\Room
 C:\Users\johnscod_admin\documents\visual studio 2015\Projects\Room_Schedule\Room_Schedule\obj\x86\Debug\Room_Schedule.csproj.GenerateResource.Cache
 C:\Users\johnscod_admin\documents\visual studio 2015\Projects\Room_Schedule\Room_Schedule\obj\x86\Debug\Room_Schedule.exe
 C:\Users\johnscod_admin\documents\visual studio 2015\Projects\Room_Schedule\Room_Schedule\obj\x86\Debug\Room_Schedule.pdb
+C:\Users\johnscod_admin\documents\visual studio 2015\Projects\Room_Schedule\Room_Schedule\obj\x86\Debug\Room_Schedule.csprojResolveAssemblyReference.cache
