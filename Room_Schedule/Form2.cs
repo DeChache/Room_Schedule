@@ -33,10 +33,11 @@ namespace Room_Schedule
             var dataInsert = new SQLiteCommand(m_dbConnection);
             var checkedButton = groupBox1.Controls.OfType<RadioButton>()
                                       .FirstOrDefault(r => r.Checked);
-            var scheduleDate = dateTimePicker1.Value.Month + "/" + dateTimePicker1.Value.Day + "/" + dateTimePicker1.Value.Year;
-            var scheduleTime = dateTimePicker2.Value.Hour + ":" + dateTimePicker2.Value.Minute;
+            var roomName = checkedButton.Name.ToString();
+            var appointmentDate = dateTimePicker1.Value.Month + "/" + dateTimePicker1.Value.Day + "/" + dateTimePicker1.Value.Year;
+            var appointmentTime = dateTimePicker2.Value.Hour + ":" + dateTimePicker2.Value.Minute;
 
-            dataInsert.CommandText = "INSERT INTO Room_Schedule (ScheduleDate,Room,Description1,Description2,Description3) VALUES (scheduleDate,checkedButton.Name,this.textBox1.Text,this.textBox2.Text,this.textBox3.Text);";
+            dataInsert.CommandText = "INSERT INTO Room_Schedule VALUES ('" + appointmentDate + "','" + roomName + "','" + this.textBox1.Text + "','" + this.textBox2.Text + "','" + this.textBox3.Text +"');";
             dataInsert.ExecuteNonQuery();
 
             //            MessageBox.Show("The selected date is " + dateTimePicker1.Value.Month + "/" + dateTimePicker1.Value.Day + "/" 
@@ -46,6 +47,11 @@ namespace Room_Schedule
             //            " The Value of Box 1 is " + this.textBox1.Text +
             //            " The Value of Box 2 is " + this.textBox2.Text +
             //            " The Value of Box 3 is " + this.textBox3.Text);
+        }
+
+        private object ToString(string name)
+        {
+            throw new NotImplementedException();
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)
