@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SQLite;
 
 namespace Room_Schedule
 {
@@ -35,7 +36,18 @@ namespace Room_Schedule
 
         private void button3_Click(object sender, EventArgs e)
         {
-
+            DataTable schedule = new DataTable();
+            SQLiteConnection m_dbConnection;
+            m_dbConnection = new SQLiteConnection("Data Source=room_schedule.db;Version=3;");
+            m_dbConnection.Open();
+            var dataRetrieve = new SQLiteCommand(m_dbConnection);
+            dataRetrieve.CommandText = "Select * from Room_Schedule;";
+            SQLiteDataAdapter scheduleData = new SQLiteDataAdapter(dataRetrieve);
+            scheduleData.Fill(schedule);
+            dataGridView1.DataSource = schedule;
+     
         }
+
+
     }
 }
