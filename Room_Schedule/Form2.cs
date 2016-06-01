@@ -34,10 +34,13 @@ namespace Room_Schedule
             var checkedButton = groupBox1.Controls.OfType<RadioButton>()
                                       .FirstOrDefault(r => r.Checked);
             var roomName = checkedButton.Name.ToString();
-            var appointmentDate = dateTimePicker1.Value.Month + "/" + dateTimePicker1.Value.Day + "/" + dateTimePicker1.Value.Year;
-            var appointmentTime = dateTimePicker2.Value.Hour + ":" + dateTimePicker2.Value.Minute;
+            //var appointmentDate = dateTimePicker1.Value.Month + "/" + dateTimePicker1.Value.Day + "/" + dateTimePicker1.Value.Year;
+            DateTimeOffset appointmentDateTime = new DateTimeOffset(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month, dateTimePicker1.Value.Day, 0, 0, 0, TimeSpan.Zero);
+            var appointmentDate = appointmentDateTime.ToUnixTimeSeconds();
+            DateTimeOffset appointmentSlotTime = new DateTimeOffset(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month, dateTimePicker1.Value.Day, dateTimePicker2.Value.Hour, dateTimePicker2.Value.Minute, 0, TimeSpan.Zero);
+            var appointmentSlot = appointmentSlotTime.ToUnixTimeSeconds();
 
-            dataInsert.CommandText = "INSERT INTO Room_Schedule VALUES ('" + appointmentDate + "','" + roomName + "','" + this.textBox1.Text + "','" + this.textBox2.Text + "','" + this.textBox3.Text +"');";
+            dataInsert.CommandText = "INSERT INTO Room_Schedule VALUES ('" + appointmentDate + "','" + appointmentSlot + "','"  + roomName + "','" + this.textBox1.Text + "','" + this.textBox2.Text + "','" + this.textBox3.Text +"');";
             dataInsert.ExecuteNonQuery();
 
             //            MessageBox.Show("The selected date is " + dateTimePicker1.Value.Month + "/" + dateTimePicker1.Value.Day + "/" 

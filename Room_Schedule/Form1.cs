@@ -16,6 +16,15 @@ namespace Room_Schedule
         public Form1()
         {
             InitializeComponent();
+            DataTable schedule = new DataTable();
+            SQLiteConnection m_dbConnection;
+            m_dbConnection = new SQLiteConnection("Data Source=room_schedule.db;Version=3;");
+            m_dbConnection.Open();
+            var dataRetrieve = new SQLiteCommand(m_dbConnection);
+            dataRetrieve.CommandText = "Select * from Room_Schedule;";
+            SQLiteDataAdapter scheduleData = new SQLiteDataAdapter(dataRetrieve);
+            scheduleData.Fill(schedule);
+            dataGridView1.DataSource = schedule;
         }
 
         private void Form1_Load(object sender, EventArgs e)
