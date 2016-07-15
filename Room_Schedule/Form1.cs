@@ -22,9 +22,9 @@ namespace Room_Schedule
             schedule_nice.Columns.Add("Date");
             schedule_nice.Columns.Add("Time");
             schedule_nice.Columns.Add("Room");
-            schedule_nice.Columns.Add("Discription1");
-            schedule_nice.Columns.Add("Discription2");
-            schedule_nice.Columns.Add("Discription3");
+            schedule_nice.Columns.Add("Description1");
+            schedule_nice.Columns.Add("Description2");
+            schedule_nice.Columns.Add("Description3");
             //Data table for raw data from database
             DataTable schedule = new DataTable();
             SQLiteConnection m_dbConnection;
@@ -36,18 +36,27 @@ namespace Room_Schedule
             scheduleData.Fill(schedule);
                         foreach (DataRow data in schedule.Rows)
             {
-                
-                int unix_time = Convert.ToInt32(data["ScheduleDate"]);
+                //Convert date from Unix time to human readable time
+                int unix_date = Convert.ToInt32(data["ScheduleDate"]);
+                DateTimeOffset standard_date = DateTimeOffset.FromUnixTimeSeconds(unix_date);
+
+                //Convert time from Unix time to human readable time
+                int unix_time = Convert.ToInt32(data["ScheduleTime"]);
                 DateTimeOffset standard_time = DateTimeOffset.FromUnixTimeSeconds(unix_time);
-                //MessageBox.Show("The date is " + standard_time.Month + "/" + standard_time.Day + "/" + standard_time.Year );
-                String display_time = standard_time.Month + "/" + standard_time.Day + "/" + standard_time.Year;
+                //DateTime standard_12_hour = standard_time; 
+
+                //Convert datetime to string
+                DateTime Local_Time = standard_time.DateTime;
+                String display_date = standard_date.Month + "/" + standard_date.Day + "/" + standard_date.Year;
+                String display_time = Local_Time.ToString("hh"+":"+"mm"+"tt") ;
+
                 DataRow Human_data = schedule_nice.NewRow();
-                Human_data["Date"] = display_time;
-                Human_data["Time"] = data["ScheduleTime"];
+                Human_data["Date"] = display_date;
+                Human_data["Time"] = display_time;
                 Human_data["Room"] = data["Room"];
-                Human_data["Discription1"] = data["Discription1"];
-                Human_data["Discription2"] = data["Discription2"];
-                Human_data["Discription3"] = data["Discription3"];
+                Human_data["Description1"] = data["Description1"];
+                Human_data["Description2"] = data["Description2"];
+                Human_data["Description3"] = data["Description3"];
                 schedule_nice.Rows.Add(Human_data);
                 //MessageBox.Show("The row data is " + data) ;
               
