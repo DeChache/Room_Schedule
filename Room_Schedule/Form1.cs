@@ -16,6 +16,16 @@ namespace Room_Schedule
         public Form1()
         {
             InitializeComponent();
+            //Initialize Data table to be displayed
+            DataTable schedule_nice = new DataTable();
+            schedule_nice.Clear();
+            schedule_nice.Columns.Add("Date");
+            schedule_nice.Columns.Add("Time");
+            schedule_nice.Columns.Add("Room");
+            schedule_nice.Columns.Add("Discription1");
+            schedule_nice.Columns.Add("Discription2");
+            schedule_nice.Columns.Add("Discription3");
+            //Data table for raw data from database
             DataTable schedule = new DataTable();
             SQLiteConnection m_dbConnection;
             m_dbConnection = new SQLiteConnection("Data Source=room_schedule.db;Version=3;");
@@ -26,14 +36,6 @@ namespace Room_Schedule
             scheduleData.Fill(schedule);
                         foreach (DataRow data in schedule.Rows)
             {
-                DataTable schedule_nice = new DataTable();
-                schedule_nice.Clear();
-                schedule_nice.Columns.Add("Date");
-                schedule_nice.Columns.Add("Time");
-                schedule_nice.Columns.Add("Room");
-                schedule_nice.Columns.Add("Discription1");
-                schedule_nice.Columns.Add("Discription2");
-                schedule_nice.Columns.Add("Discription3");
                 
                 int unix_time = Convert.ToInt32(data["ScheduleDate"]);
                 DateTimeOffset standard_time = DateTimeOffset.FromUnixTimeSeconds(unix_time);
