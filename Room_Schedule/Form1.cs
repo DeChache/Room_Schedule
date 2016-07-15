@@ -11,10 +11,13 @@ using System.Data.SQLite;
 
 namespace Room_Schedule
 {
+
     public partial class Form1 : Form
     {
+        DataTable schedule_nice = new DataTable();
         public Form1()
         {
+            
             DateTime Today = DateTime.Today;
             DateTimeOffset Today_DTO = new DateTimeOffset (Today.Year, Today.Month, Today.Day, 0, 0, 0, TimeSpan.Zero);
             int Today_UNIX = (int)Today_DTO.ToUnixTimeSeconds();
@@ -36,8 +39,18 @@ namespace Room_Schedule
             m_dbConnection = new SQLiteConnection("Data Source=room_schedule.db;Version=3;");
             m_dbConnection.Open();
             var dataInsert = new SQLiteCommand(m_dbConnection);
-            dataInsert.CommandText = "INSERT INTO Room_Schedule VALUES ('" + appointmentDate + "','" + appointmentSlot + "','" + roomName + "','" + this.textBox1.Text + "','" + this.textBox2.Text + "','" + this.textBox3.Text + "');";
-            dataInsert.ExecuteNonQuery();
+            foreach (DataRow newData in schedule_nice.Rows)
+                try
+            {
+                dataInsert.CommandText = "Update Room_Schedule Where ScheduleData = "+ newData["Date"]+"and ScheduleTime ="+newData["Time"]+"and Room ="+ newData["Room"]+ "  VALUES ('" + newData["Date"] + "','" + newData["Time"] + "','" + newData["Room"] + "','" + newData["Description1"] + "','" + newData["Description2"] + "','" + newData["Description3"] + "');";
+                dataInsert.ExecuteNonQuery();
+            }
+            catch
+            {
+                    dataInsert.CommandText = "Insert INTO Room_Schedule VALUES ('" + newData["Date"] + "','" + newData["Time"] + "','" + newData["Room"] + "','" + newData["Description1"] + "','" + newData["Description2"] + "','" + newData["Description3"] + "');";
+                    dataInsert.ExecuteNonQuery();
+
+                }
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -58,7 +71,7 @@ namespace Room_Schedule
         public void refreshDataDisplay(int Date)
         {
             //Initialize Data table to be displayed
-            DataTable schedule_nice = new DataTable();
+            
             schedule_nice.Clear();
             schedule_nice.Columns.Add("Date");
             schedule_nice.Columns.Add("Time");
@@ -66,6 +79,7 @@ namespace Room_Schedule
             schedule_nice.Columns.Add("Description1");
             schedule_nice.Columns.Add("Description2");
             schedule_nice.Columns.Add("Description3");
+          
             //Data table for raw data from database
             DataTable schedule = new DataTable();
             SQLiteConnection m_dbConnection;
@@ -88,7 +102,7 @@ namespace Room_Schedule
 
                 //Convert datetime to string
                 //DateTime Local_Time = standard_time.DateTime;
-                //String display_date = standard_date.Month + "/" + standard_date.Day + "/" + standard_date.Year;
+                String display_date = standard_date.Month + "/" + standard_date.Day + "/" + standard_date.Year;
                 //String display_time = Local_Time.ToString("hh" + ":" + "mm" + "tt");
 
                 //Add data to nice data table
