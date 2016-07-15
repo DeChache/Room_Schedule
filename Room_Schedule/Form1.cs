@@ -15,8 +15,12 @@ namespace Room_Schedule
     {
         public Form1()
         {
+            DateTime Today = DateTime.Today;
+            DateTimeOffset Today_DTO = new DateTimeOffset (Today.Year, Today.Month, Today.Day, 0, 0, 0, TimeSpan.Zero);
+            int Today_UNIX = (int)Today_DTO.ToUnixTimeSeconds();
+
             InitializeComponent();
-            refreshDataDisplay();
+            refreshDataDisplay(Today_UNIX);
 
 
         }
@@ -39,12 +43,15 @@ namespace Room_Schedule
 
         private void button3_Click(object sender, EventArgs e)
         {
-            refreshdataDisplay();
+            DateTime Today = DateTime.Today;
+            DateTimeOffset Today_DTO = new DateTimeOffset(Today.Year, Today.Month, Today.Day, 0, 0, 0, TimeSpan.Zero);
+            int Today_UNIX = (int)Today_DTO.ToUnixTimeSeconds();
+            refreshDataDisplay(Today_UNIX);
 
 
         }
 
-        public void refreshDataDisplay()
+        public void refreshDataDisplay(int Date)
         {
             //Initialize Data table to be displayed
             DataTable schedule_nice = new DataTable();
@@ -61,7 +68,7 @@ namespace Room_Schedule
             m_dbConnection = new SQLiteConnection("Data Source=room_schedule.db;Version=3;");
             m_dbConnection.Open();
             var dataRetrieve = new SQLiteCommand(m_dbConnection);
-            dataRetrieve.CommandText = "Select * from Room_Schedule;";
+            dataRetrieve.CommandText = "Select * from Room_Schedule where ScheduleDate="+Date+";";
             SQLiteDataAdapter scheduleData = new SQLiteDataAdapter(dataRetrieve);
             scheduleData.Fill(schedule);
             foreach (DataRow data in schedule.Rows)
@@ -80,6 +87,7 @@ namespace Room_Schedule
                 String display_date = standard_date.Month + "/" + standard_date.Day + "/" + standard_date.Year;
                 String display_time = Local_Time.ToString("hh" + ":" + "mm" + "tt");
 
+                //Add data to nice data table
                 DataRow Human_data = schedule_nice.NewRow();
                 Human_data["Date"] = display_date;
                 Human_data["Time"] = display_time;

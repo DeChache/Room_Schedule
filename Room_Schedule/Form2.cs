@@ -50,6 +50,8 @@ namespace Room_Schedule
             //            " The Value of Box 1 is " + this.textBox1.Text +
             //            " The Value of Box 2 is " + this.textBox2.Text +
             //            " The Value of Box 3 is " + this.textBox3.Text);
+
+            MessageBox.Show("Room has been scheduled");
         }
 
         private object ToString(string name)

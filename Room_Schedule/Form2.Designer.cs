@@ -38,7 +38,7 @@
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Room1 = new System.Windows.Forms.RadioButton();
-            this.s = new System.Windows.Forms.RadioButton();
+            this.Room2 = new System.Windows.Forms.RadioButton();
             this.Room3 = new System.Windows.Forms.RadioButton();
             this.Room4 = new System.Windows.Forms.RadioButton();
             this.Room5 = new System.Windows.Forms.RadioButton();
@@ -133,17 +133,17 @@
             this.Room1.Text = "Room 1";
             this.Room1.UseVisualStyleBackColor = true;
             // 
-            // s
+            // Room2
             // 
-            this.s.AutoSize = true;
-            this.s.Location = new System.Drawing.Point(3, 42);
-            this.s.Name = "s";
-            this.s.Size = new System.Drawing.Size(62, 17);
-            this.s.TabIndex = 9;
-            this.s.TabStop = true;
-            this.s.Text = "Room 2";
-            this.s.UseVisualStyleBackColor = true;
-            this.s.CheckedChanged += new System.EventHandler(this.room2_CheckedChanged);
+            this.Room2.AutoSize = true;
+            this.Room2.Location = new System.Drawing.Point(3, 42);
+            this.Room2.Name = "Room2";
+            this.Room2.Size = new System.Drawing.Size(62, 17);
+            this.Room2.TabIndex = 9;
+            this.Room2.TabStop = true;
+            this.Room2.Text = "Room 2";
+            this.Room2.UseVisualStyleBackColor = true;
+            this.Room2.CheckedChanged += new System.EventHandler(this.room2_CheckedChanged);
             // 
             // Room3
             // 
@@ -182,7 +182,7 @@
             // 
             this.groupBox1.Controls.Add(this.Room1);
             this.groupBox1.Controls.Add(this.Room5);
-            this.groupBox1.Controls.Add(this.s);
+            this.groupBox1.Controls.Add(this.Room2);
             this.groupBox1.Controls.Add(this.Room4);
             this.groupBox1.Controls.Add(this.Room3);
             this.groupBox1.Location = new System.Drawing.Point(75, 113);
@@ -230,7 +230,7 @@
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.RadioButton Room1;
-        private System.Windows.Forms.RadioButton s;
+        private System.Windows.Forms.RadioButton Room2;
         private System.Windows.Forms.RadioButton Room3;
         private System.Windows.Forms.RadioButton Room4;
         private System.Windows.Forms.RadioButton Room5;
