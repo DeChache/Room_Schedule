@@ -24,6 +24,17 @@ namespace Room_Schedule
             dataRetrieve.CommandText = "Select * from Room_Schedule;";
             SQLiteDataAdapter scheduleData = new SQLiteDataAdapter(dataRetrieve);
             scheduleData.Fill(schedule);
+                        foreach (DataRow data in schedule.Rows)
+            {
+                int index = 0;
+                int unix_time = Convert.ToInt32(data["ScheduleDate"]);
+                DateTimeOffset standard_time = DateTimeOffset.FromUnixTimeSeconds(unix_time);
+                //MessageBox.Show("The date is " + standard_time.Month + "/" + standard_time.Day + "/" + standard_time.Year );
+                String display_time = standard_time.Month + "/" + standard_time.Day + "/" + standard_time.Year;
+                schedule.Rows[index].ItemArray[0] = display_time;
+                MessageBox.Show("The row data is " + data) ;
+                index = index + 1;
+            }
             dataGridView1.DataSource = schedule;
         }
 

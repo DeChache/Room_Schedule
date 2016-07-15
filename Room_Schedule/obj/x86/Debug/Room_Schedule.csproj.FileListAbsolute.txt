@@ -10,3 +10,14 @@ C:\Users\johnscod_admin\documents\visual studio 2015\Projects\Room_Schedule\Room
 C:\Users\johnscod_admin\documents\visual studio 2015\Projects\Room_Schedule\Room_Schedule\obj\x86\Debug\Room_Schedule.exe
 C:\Users\johnscod_admin\documents\visual studio 2015\Projects\Room_Schedule\Room_Schedule\obj\x86\Debug\Room_Schedule.pdb
 C:\Users\johnscod_admin\documents\visual studio 2015\Projects\Room_Schedule\Room_Schedule\obj\x86\Debug\Room_Schedule.csprojResolveAssemblyReference.cache
+E:\code\room_schedule\Room_Schedule\bin\x86\Debug\Room_Schedule.exe.config
+E:\code\room_schedule\Room_Schedule\obj\x86\Debug\Room_Schedule.exe
+E:\code\room_schedule\Room_Schedule\obj\x86\Debug\Room_Schedule.pdb
+E:\code\room_schedule\Room_Schedule\bin\x86\Debug\Room_Schedule.exe
+E:\code\room_schedule\Room_Schedule\bin\x86\Debug\Room_Schedule.pdb
+E:\code\room_schedule\Room_Schedule\bin\x86\Debug\System.Data.SQLite.pdb
+E:\code\room_schedule\Room_Schedule\obj\x86\Debug\Room_Schedule.csprojResolveAssemblyReference.cache
+E:\code\room_schedule\Room_Schedule\obj\x86\Debug\Room_Schedule.Form1.resources
+E:\code\room_schedule\Room_Schedule\obj\x86\Debug\Room_Schedule.Form2.resources
+E:\code\room_schedule\Room_Schedule\obj\x86\Debug\Room_Schedule.Properties.Resources.resources
+E:\code\room_schedule\Room_Schedule\obj\x86\Debug\Room_Schedule.csproj.GenerateResource.Cache
