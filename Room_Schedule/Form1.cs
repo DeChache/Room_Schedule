@@ -39,18 +39,26 @@ namespace Room_Schedule
             m_dbConnection = new SQLiteConnection("Data Source=room_schedule.db;Version=3;");
             m_dbConnection.Open();
             var dataInsert = new SQLiteCommand(m_dbConnection);
+            MessageBox.Show("Trying to Before Loop");
             foreach (DataRow newData in schedule_nice.Rows)
                 try
             {
-                dataInsert.CommandText = "Update Room_Schedule Where ScheduleData = "+ newData["Date"]+"and ScheduleTime ="+newData["Time"]+"and Room ="+ newData["Room"]+ "  VALUES ('" + newData["Date"] + "','" + newData["Time"] + "','" + newData["Room"] + "','" + newData["Description1"] + "','" + newData["Description2"] + "','" + newData["Description3"] + "');";
+
+                    dataInsert.CommandText = "Update Room_Schedule Set ScheduleDate =" + newData["Date"] + "',' SchedulteTime=" + newData["Time"] + "','Room="+ newData["Room"] + "','Description1=" + newData["Description1"] + "','Description2=" + newData["Description2"] + "','Description3=" + newData["Description3"] + "Where ScheduleData = " + newData["Date"] + "and ScheduleTime =" + newData["Time"] + "and Room =" + newData["Room"] + ";";
                 dataInsert.ExecuteNonQuery();
+                
             }
             catch
             {
                     dataInsert.CommandText = "Insert INTO Room_Schedule VALUES ('" + newData["Date"] + "','" + newData["Time"] + "','" + newData["Room"] + "','" + newData["Description1"] + "','" + newData["Description2"] + "','" + newData["Description3"] + "');";
                     dataInsert.ExecuteNonQuery();
+                    MessageBox.Show("Trying to Insert");
 
                 }
+
+            DateTimeOffset selectedDateTime = new DateTimeOffset(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month, dateTimePicker1.Value.Day, 0, 0, 0, TimeSpan.Zero);
+            int Today_UNIX = (int)selectedDateTime.ToUnixTimeSeconds();
+            refreshDataDisplay(Today_UNIX);
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
