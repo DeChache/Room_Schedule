@@ -26,16 +26,31 @@ namespace Room_Schedule
             scheduleData.Fill(schedule);
                         foreach (DataRow data in schedule.Rows)
             {
-                int index = 0;
+                DataTable schedule_nice = new DataTable();
+                schedule_nice.Clear();
+                schedule_nice.Columns.Add("Date");
+                schedule_nice.Columns.Add("Time");
+                schedule_nice.Columns.Add("Room");
+                schedule_nice.Columns.Add("Discription1");
+                schedule_nice.Columns.Add("Discription2");
+                schedule_nice.Columns.Add("Discription3");
+                
                 int unix_time = Convert.ToInt32(data["ScheduleDate"]);
                 DateTimeOffset standard_time = DateTimeOffset.FromUnixTimeSeconds(unix_time);
                 //MessageBox.Show("The date is " + standard_time.Month + "/" + standard_time.Day + "/" + standard_time.Year );
                 String display_time = standard_time.Month + "/" + standard_time.Day + "/" + standard_time.Year;
-                schedule.Rows[index].ItemArray[0] = display_time;
-                MessageBox.Show("The row data is " + data) ;
-                index = index + 1;
+                DataRow Human_data = schedule_nice.NewRow();
+                Human_data["Date"] = display_time;
+                Human_data["Time"] = data["ScheduleTime"];
+                Human_data["Room"] = data["Room"];
+                Human_data["Discription1"] = data["Discription1"];
+                Human_data["Discription2"] = data["Discription2"];
+                Human_data["Discription3"] = data["Discription3"];
+                schedule_nice.Rows.Add(Human_data);
+                //MessageBox.Show("The row data is " + data) ;
+              
             }
-            dataGridView1.DataSource = schedule;
+            dataGridView1.DataSource = schedule_nice;
         }
 
         private void Form1_Load(object sender, EventArgs e)
