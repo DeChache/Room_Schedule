@@ -32,8 +32,12 @@ namespace Room_Schedule
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Form2 frm = new Form2();
-            frm.Show();
+            SQLiteConnection m_dbConnection;
+            m_dbConnection = new SQLiteConnection("Data Source=room_schedule.db;Version=3;");
+            m_dbConnection.Open();
+            var dataInsert = new SQLiteCommand(m_dbConnection);
+            dataInsert.CommandText = "INSERT INTO Room_Schedule VALUES ('" + appointmentDate + "','" + appointmentSlot + "','" + roomName + "','" + this.textBox1.Text + "','" + this.textBox2.Text + "','" + this.textBox3.Text + "');";
+            dataInsert.ExecuteNonQuery();
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -43,9 +47,9 @@ namespace Room_Schedule
 
         private void button3_Click(object sender, EventArgs e)
         {
-            DateTime Today = DateTime.Today;
-            DateTimeOffset Today_DTO = new DateTimeOffset(Today.Year, Today.Month, Today.Day, 0, 0, 0, TimeSpan.Zero);
-            int Today_UNIX = (int)Today_DTO.ToUnixTimeSeconds();
+
+            DateTimeOffset selectedDateTime = new DateTimeOffset(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month, dateTimePicker1.Value.Day, 0, 0, 0, TimeSpan.Zero);
+            int Today_UNIX = (int)selectedDateTime.ToUnixTimeSeconds();
             refreshDataDisplay(Today_UNIX);
 
 
@@ -83,14 +87,14 @@ namespace Room_Schedule
                 //DateTime standard_12_hour = standard_time; 
 
                 //Convert datetime to string
-                DateTime Local_Time = standard_time.DateTime;
-                String display_date = standard_date.Month + "/" + standard_date.Day + "/" + standard_date.Year;
-                String display_time = Local_Time.ToString("hh" + ":" + "mm" + "tt");
+                //DateTime Local_Time = standard_time.DateTime;
+                //String display_date = standard_date.Month + "/" + standard_date.Day + "/" + standard_date.Year;
+                //String display_time = Local_Time.ToString("hh" + ":" + "mm" + "tt");
 
                 //Add data to nice data table
                 DataRow Human_data = schedule_nice.NewRow();
                 Human_data["Date"] = display_date;
-                Human_data["Time"] = display_time;
+                Human_data["Time"] = data["SchedulteTime"];
                 Human_data["Room"] = data["Room"];
                 Human_data["Description1"] = data["Description1"];
                 Human_data["Description2"] = data["Description2"];

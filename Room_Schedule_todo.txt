@@ -1,7 +1,7 @@
 To Do
 
-Convet back from Unix Time to Display 
-Status Message when Room is scheduled
+Convet back from Unix Time to Display --Done
+Status Message when Room is scheduled --Done
 Data Selector for Refresh Schedule button
 Print Styles
 Finish design for scheduleing room
