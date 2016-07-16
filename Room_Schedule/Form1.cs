@@ -23,6 +23,7 @@ namespace Room_Schedule
             int Today_UNIX = (int)Today_DTO.ToUnixTimeSeconds();
 
             InitializeComponent();
+            initializeDataTable();
             refreshDataDisplay(Today_UNIX);
 
 
@@ -39,26 +40,39 @@ namespace Room_Schedule
             m_dbConnection = new SQLiteConnection("Data Source=room_schedule.db;Version=3;");
             m_dbConnection.Open();
             var dataInsert = new SQLiteCommand(m_dbConnection);
-            MessageBox.Show("Trying to Before Loop");
             foreach (DataRow newData in schedule_nice.Rows)
-                try
             {
+                string sDate = newData["Date"].ToString();
+                DateTime dt = Convert.ToDateTime(sDate);
+                DateTimeOffset insertDateTime = new DateTimeOffset(dt.Year, dt.Month, dt.Day, 0, 0, 0, TimeSpan.Zero);
+                int insert_UNIX = (int)insertDateTime.ToUnixTimeSeconds();
+                string indexValue = newData["Index"].ToString();
+                int indexLength = indexValue.Length;
+                if (indexLength.Equals(0))
+                {
+                    
+                    dataInsert.CommandText = "Insert INTO Room_Schedule (ScheduleDate,ScheduleTime,Room,Description1,Description2,Description3) VALUES ('" + insert_UNIX + "','" + newData["Time"] + "','" + newData["Room"] + "','" + newData["Description1"] + "','" + newData["Description2"] + "','" + newData["Description3"] + "');";
+                    dataInsert.ExecuteNonQuery();
+                }
+                else
+                {
+                    int indexNumber = Convert.ToInt32(newData["Index"]);
+                    dataInsert.CommandText = "Update Room_Schedule Set ScheduleDate ='" + insert_UNIX + "', ScheduleTime='" + newData["Time"] + "',Room='" + newData["Room"] + "', Description1='" + newData["Description1"] + "',Description2='" + newData["Description2"] + "',Description3='" + newData["Description3"] + "' Where ScheduleDate = '" + insert_UNIX + "' and ScheduleTime ='" + newData["Time"] + "' and Room ='" + newData["Room"] + "';";
+                    dataInsert.ExecuteNonQuery();
+                }
+                
 
-                    dataInsert.CommandText = "Update Room_Schedule Set ScheduleDate =" + newData["Date"] + "',' SchedulteTime=" + newData["Time"] + "','Room="+ newData["Room"] + "','Description1=" + newData["Description1"] + "','Description2=" + newData["Description2"] + "','Description3=" + newData["Description3"] + "Where ScheduleData = " + newData["Date"] + "and ScheduleTime =" + newData["Time"] + "and Room =" + newData["Room"] + ";";
-                dataInsert.ExecuteNonQuery();
+
+                
+              
+
                 
             }
-            catch
-            {
-                    dataInsert.CommandText = "Insert INTO Room_Schedule VALUES ('" + newData["Date"] + "','" + newData["Time"] + "','" + newData["Room"] + "','" + newData["Description1"] + "','" + newData["Description2"] + "','" + newData["Description3"] + "');";
-                    dataInsert.ExecuteNonQuery();
-                    MessageBox.Show("Trying to Insert");
-
-                }
 
             DateTimeOffset selectedDateTime = new DateTimeOffset(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month, dateTimePicker1.Value.Day, 0, 0, 0, TimeSpan.Zero);
             int Today_UNIX = (int)selectedDateTime.ToUnixTimeSeconds();
             refreshDataDisplay(Today_UNIX);
+            MessageBox.Show("Schedule Has Been Saved");
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -76,17 +90,22 @@ namespace Room_Schedule
 
         }
 
-        public void refreshDataDisplay(int Date)
+        public void initializeDataTable()
         {
-            //Initialize Data table to be displayed
-            
-            schedule_nice.Clear();
+            schedule_nice.Columns.Add("Index");
             schedule_nice.Columns.Add("Date");
             schedule_nice.Columns.Add("Time");
             schedule_nice.Columns.Add("Room");
             schedule_nice.Columns.Add("Description1");
             schedule_nice.Columns.Add("Description2");
             schedule_nice.Columns.Add("Description3");
+        }
+
+        public void refreshDataDisplay(int Date)
+        {
+            //Clear Data table for new data
+            
+            schedule_nice.Clear();
           
             //Data table for raw data from database
             DataTable schedule = new DataTable();
@@ -104,8 +123,8 @@ namespace Room_Schedule
                 DateTimeOffset standard_date = DateTimeOffset.FromUnixTimeSeconds(unix_date);
 
                 //Convert time from Unix time to human readable time
-                int unix_time = Convert.ToInt32(data["ScheduleTime"]);
-                DateTimeOffset standard_time = DateTimeOffset.FromUnixTimeSeconds(unix_time);
+                //int unix_time = Convert.ToInt32(data["ScheduleTime"]);
+                //DateTimeOffset standard_time = DateTimeOffset.FromUnixTimeSeconds(unix_time);
                 //DateTime standard_12_hour = standard_time; 
 
                 //Convert datetime to string
@@ -115,8 +134,9 @@ namespace Room_Schedule
 
                 //Add data to nice data table
                 DataRow Human_data = schedule_nice.NewRow();
+                Human_data["Index"] = data["Index"];
                 Human_data["Date"] = display_date;
-                Human_data["Time"] = data["SchedulteTime"];
+                Human_data["Time"] = data["ScheduleTime"];
                 Human_data["Room"] = data["Room"];
                 Human_data["Description1"] = data["Description1"];
                 Human_data["Description2"] = data["Description2"];
@@ -126,9 +146,22 @@ namespace Room_Schedule
 
             }
             dataGridView1.DataSource = schedule_nice;
+            dataGridView1.AutoGenerateColumns = false;
+            dataGridView1.Columns["Index"].Visible = false;
+
 
         }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
 
+        }
+
+        private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        {
+            Bitmap bm = new Bitmap(this.dataGridView1.Width, this.dataGridView1.Height);
+            dataGridView1.DrawToBitmap(bm, new Rectangle(0, 0, this.dataGridView1.Width, this.dataGridView1.Height));
+            e.Graphics.DrawImage(bm, 0, 0);
+        }
     }
 }
