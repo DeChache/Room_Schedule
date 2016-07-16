@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SQLite;
+using System.Drawing.Printing;
 
 namespace Room_Schedule
 {
@@ -15,6 +16,7 @@ namespace Room_Schedule
     public partial class Form1 : Form
     {
         DataTable schedule_nice = new DataTable();
+        
         public Form1()
         {
             
@@ -154,8 +156,10 @@ namespace Room_Schedule
 
         private void button2_Click(object sender, EventArgs e)
         {
-
+            printDocument1.Print();
         }
+
+     
 
         private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
         {
@@ -164,4 +168,6 @@ namespace Room_Schedule
             e.Graphics.DrawImage(bm, 0, 0);
         }
     }
-}
+
+        
+    }

@@ -1,0 +1,5 @@
+E:\code\room_schedule\Room_Schedule\bin\x86\Release\Room_Schedule.exe.config
+E:\code\room_schedule\Room_Schedule\obj\x86\Release\Room_Schedule.Form1.resources
+E:\code\room_schedule\Room_Schedule\obj\x86\Release\Room_Schedule.Form2.resources
+E:\code\room_schedule\Room_Schedule\obj\x86\Release\Room_Schedule.Properties.Resources.resources
+E:\code\room_schedule\Room_Schedule\obj\x86\Release\Room_Schedule.csproj.GenerateResource.Cache
