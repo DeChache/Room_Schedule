@@ -21,3 +21,13 @@ E:\code\room_schedule\Room_Schedule\obj\Debug\Room_Schedule.csproj.GenerateResou
 E:\code\room_schedule\Room_Schedule\bin\Debug\Room_Schedule.exe
 E:\code\room_schedule\Room_Schedule\bin\Debug\Room_Schedule.pdb
 E:\code\room_schedule\Room_Schedule\bin\Debug\System.Data.SQLite.pdb
+C:\Users\DeChache\Documents\dev_code\room_schedule\Room_Schedule\bin\Debug\Room_Schedule.exe.config
+C:\Users\DeChache\Documents\dev_code\room_schedule\Room_Schedule\obj\Debug\Room_Schedule.exe
+C:\Users\DeChache\Documents\dev_code\room_schedule\Room_Schedule\obj\Debug\Room_Schedule.pdb
+C:\Users\DeChache\Documents\dev_code\room_schedule\Room_Schedule\bin\Debug\Room_Schedule.exe
+C:\Users\DeChache\Documents\dev_code\room_schedule\Room_Schedule\bin\Debug\Room_Schedule.pdb
+C:\Users\DeChache\Documents\dev_code\room_schedule\Room_Schedule\obj\Debug\Room_Schedule.csprojResolveAssemblyReference.cache
+C:\Users\DeChache\Documents\dev_code\room_schedule\Room_Schedule\obj\Debug\Room_Schedule.Form1.resources
+C:\Users\DeChache\Documents\dev_code\room_schedule\Room_Schedule\obj\Debug\Room_Schedule.Form2.resources
+C:\Users\DeChache\Documents\dev_code\room_schedule\Room_Schedule\obj\Debug\Room_Schedule.Properties.Resources.resources
+C:\Users\DeChache\Documents\dev_code\room_schedule\Room_Schedule\obj\Debug\Room_Schedule.csproj.GenerateResource.Cache

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -19,16 +20,8 @@ namespace Room_Schedule
         
         public Form1()
         {
-            
-            DateTime Today = DateTime.Today;
-            DateTimeOffset Today_DTO = new DateTimeOffset (Today.Year, Today.Month, Today.Day, 0, 0, 0, TimeSpan.Zero);
-            int Today_UNIX = (int)Today_DTO.ToUnixTimeSeconds();
-
             InitializeComponent();
-            initializeDataTable();
-            refreshDataDisplay(Today_UNIX);
-
-
+            CheckDB();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -42,12 +35,31 @@ namespace Room_Schedule
             m_dbConnection = new SQLiteConnection("Data Source=room_schedule.db;Version=3;");
             m_dbConnection.Open();
             var dataInsert = new SQLiteCommand(m_dbConnection);
+            int count = 0;
+            int rowToInsert = schedule_nice.Rows.Count;
             foreach (DataRow newData in schedule_nice.Rows)
             {
+                
                 string sDate = newData["Date"].ToString();
-                DateTime dt = Convert.ToDateTime(sDate);
-                DateTimeOffset insertDateTime = new DateTimeOffset(dt.Year, dt.Month, dt.Day, 0, 0, 0, TimeSpan.Zero);
-                int insert_UNIX = (int)insertDateTime.ToUnixTimeSeconds();
+                string sRoom = newData["Room"].ToString();
+                string sTime = newData["Time"].ToString();
+                int insert_UNIX; 
+         
+                try
+                {
+                    DateTime dt = Convert.ToDateTime(sDate);
+                    DateTimeOffset insertDateTime = new DateTimeOffset(dt.Year, dt.Month, dt.Day, 0, 0, 0, TimeSpan.Zero);
+                    insert_UNIX = (int)insertDateTime.ToUnixTimeSeconds();
+                }
+                catch
+                {
+                    MessageBox.Show("Please enter a Valid Date in the form of MM/DD/YY Please check the following record Date:" + sDate + " Room:" + sRoom + " Time:" + sTime);
+                    dataGridView1.DataSource = schedule_nice;
+                    dataGridView1.AutoGenerateColumns = false;
+                    dataGridView1.Columns["Index"].Visible = false;
+                    break;
+                }
+                
                 string indexValue = newData["Index"].ToString();
                 int indexLength = indexValue.Length;
                 if (indexLength.Equals(0))
@@ -55,26 +67,32 @@ namespace Room_Schedule
                     
                     dataInsert.CommandText = "Insert INTO Room_Schedule (ScheduleDate,ScheduleTime,Room,Description1,Description2,Description3) VALUES ('" + insert_UNIX + "','" + newData["Time"] + "','" + newData["Room"] + "','" + newData["Description1"] + "','" + newData["Description2"] + "','" + newData["Description3"] + "');";
                     dataInsert.ExecuteNonQuery();
+                    MessageBox.Show("Schedule Has Been Saved");
+
                 }
-                else
+                else if (indexLength > 0 )
                 {
                     int indexNumber = Convert.ToInt32(newData["Index"]);
                     dataInsert.CommandText = "Update Room_Schedule Set ScheduleDate ='" + insert_UNIX + "', ScheduleTime='" + newData["Time"] + "',Room='" + newData["Room"] + "', Description1='" + newData["Description1"] + "',Description2='" + newData["Description2"] + "',Description3='" + newData["Description3"] + "' Where ScheduleDate = '" + insert_UNIX + "' and ScheduleTime ='" + newData["Time"] + "' and Room ='" + newData["Room"] + "';";
                     dataInsert.ExecuteNonQuery();
+                    MessageBox.Show("Schedule Has Been Saved");
+
                 }
-                
+                else if (count == rowToInsert)
+                {
+                    DateTimeOffset selectedDateTime = new DateTimeOffset(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month, dateTimePicker1.Value.Day, 0, 0, 0, TimeSpan.Zero);
+                    int Today_UNIX = (int)selectedDateTime.ToUnixTimeSeconds();
+                    refreshDataDisplay(Today_UNIX);
+                }
+                count = count++;
 
 
-                
-              
 
-                
             }
 
-            DateTimeOffset selectedDateTime = new DateTimeOffset(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month, dateTimePicker1.Value.Day, 0, 0, 0, TimeSpan.Zero);
-            int Today_UNIX = (int)selectedDateTime.ToUnixTimeSeconds();
-            refreshDataDisplay(Today_UNIX);
-            MessageBox.Show("Schedule Has Been Saved");
+           
+            
+
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -147,6 +165,7 @@ namespace Room_Schedule
                 //MessageBox.Show("The row data is " + data) ;
 
             }
+
             dataGridView1.DataSource = schedule_nice;
             dataGridView1.AutoGenerateColumns = false;
             dataGridView1.Columns["Index"].Visible = false;
@@ -167,7 +186,55 @@ namespace Room_Schedule
             dataGridView1.DrawToBitmap(bm, new Rectangle(0, 0, this.dataGridView1.Width, this.dataGridView1.Height));
             e.Graphics.DrawImage(bm, 0, 0);
         }
+
+        public void CheckDB()
+        {
+            if (File.Exists("room_schedule.db"))
+            {
+                initializeDataTable();
+                refreshDataDisplay(getUnixTime());
+            }
+
+            else
+            {
+
+                SQLiteConnection.CreateFile("room_schedule.db");
+
+                SQLiteConnection m_dbConnection;
+                m_dbConnection = new SQLiteConnection("Data Source=room_schedule.db;Version=3;");
+                m_dbConnection.Open();
+
+                string createTables = "CREATE TABLE \"Room_Schedule\" ('Index'INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE,'ScheduleDate'INTEGER NOT NULL,'ScheduleTime'	TEXT,'Room'	TEXT,'Description1'	TEXT,'Description2'	TEXT,'Description3'	TEXT)" ;
+
+                SQLiteCommand command = new SQLiteCommand(createTables, m_dbConnection);
+                command.ExecuteNonQuery();
+
+                m_dbConnection.Close();
+
+                initializeDataTable();
+                refreshDataDisplay(getUnixTime());
+
+
+            }
+
+        }
+
+        public int getUnixTime()
+        {
+            DateTime Today = DateTime.Today;
+            DateTimeOffset Today_DTO = new DateTimeOffset(Today.Year, Today.Month, Today.Day, 0, 0, 0, TimeSpan.Zero);
+            int Today_UNIX = (int)Today_DTO.ToUnixTimeSeconds();
+
+            return Today_UNIX;
+        }
+
+ 
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 
-        
-    }
+
+}
