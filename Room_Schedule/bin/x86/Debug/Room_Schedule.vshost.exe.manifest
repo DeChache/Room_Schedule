@@ -48,14 +48,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Room_Schedule.exe" size="898048">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Room_Schedule.exe" size="891904">
       <assemblyIdentity name="Room_Schedule" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>2pbBZU5yEhPy2x4fSSVd5qF1WTTqcMnmMgbPxAkZ8UQ=</dsig:DigestValue>
+        <dsig:DigestValue>6Byiqr5B9lQgFKlHT9ML6vm2v842kTwzFZ4ZEefdUn8=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
