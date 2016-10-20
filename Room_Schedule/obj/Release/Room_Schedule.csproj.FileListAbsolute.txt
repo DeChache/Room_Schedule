@@ -8,3 +8,8 @@ C:\Users\DeChache\Documents\dev_code\room_schedule\Room_Schedule\obj\Release\Roo
 C:\Users\DeChache\Documents\dev_code\room_schedule\Room_Schedule\obj\Release\Room_Schedule.exe
 C:\Users\DeChache\Documents\dev_code\room_schedule\Room_Schedule\obj\Release\Room_Schedule.pdb
 C:\Users\DeChache\Documents\dev_code\room_schedule\Room_Schedule\obj\Release\Room_Schedule.csprojResolveAssemblyReference.cache
+C:\Users\DeChache\Documents\dev_code\room_schedule\Room_Schedule\bin\Release\Room_Schedule.exe.manifest
+C:\Users\DeChache\Documents\dev_code\room_schedule\Room_Schedule\bin\Release\Room_Schedule.application
+C:\Users\DeChache\Documents\dev_code\room_schedule\Room_Schedule\obj\Release\Room_Schedule.TrustInfo.xml
+C:\Users\DeChache\Documents\dev_code\room_schedule\Room_Schedule\obj\Release\Room_Schedule.exe.manifest
+C:\Users\DeChache\Documents\dev_code\room_schedule\Room_Schedule\obj\Release\Room_Schedule.application
