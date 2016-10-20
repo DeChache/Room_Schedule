@@ -279,7 +279,9 @@ namespace Room_Schedule
         {
             //printDocument1.Print();
             //initializePrintTable();
-            printDataDisplay(getUnixTime());
+            DateTimeOffset selectedDateTime = new DateTimeOffset(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month, dateTimePicker1.Value.Day, 0, 0, 0, TimeSpan.Zero);
+            int Print_UNIX = (int)selectedDateTime.ToUnixTimeSeconds();
+            printDataDisplay(Print_UNIX);
             ClsPrint _ClsPrint = new ClsPrint(dataGridView2, "Schedule");
             _ClsPrint.PrintForm();
             schedule_print.Clear();
