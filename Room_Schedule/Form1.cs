@@ -24,6 +24,7 @@ namespace Room_Schedule
         {
             InitializeComponent();
             CheckDB();
+            initializePrintTable();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -277,15 +278,16 @@ namespace Room_Schedule
         private void button2_Click(object sender, EventArgs e)
         {
             //printDocument1.Print();
-            initializePrintTable();
+            //initializePrintTable();
             printDataDisplay(getUnixTime());
             ClsPrint _ClsPrint = new ClsPrint(dataGridView2, "Schedule");
             _ClsPrint.PrintForm();
+            schedule_print.Clear();
         }
 
         private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
         {
-            initializePrintTable();           
+            //initializePrintTable();           
             printDataDisplay(getUnixTime());
             ClsPrint _ClsPrint = new ClsPrint(dataGridView2, "Schedule");
             _ClsPrint.PrintForm();
