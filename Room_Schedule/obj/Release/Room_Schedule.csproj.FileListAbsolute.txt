@@ -13,3 +13,11 @@ C:\Users\DeChache\Documents\dev_code\room_schedule\Room_Schedule\bin\Release\Roo
 C:\Users\DeChache\Documents\dev_code\room_schedule\Room_Schedule\obj\Release\Room_Schedule.TrustInfo.xml
 C:\Users\DeChache\Documents\dev_code\room_schedule\Room_Schedule\obj\Release\Room_Schedule.exe.manifest
 C:\Users\DeChache\Documents\dev_code\room_schedule\Room_Schedule\obj\Release\Room_Schedule.application
+C:\Users\DeChache\Documents\dev_code\room_schedule\Room_Schedule\bin\Release\EntityFramework.dll
+C:\Users\DeChache\Documents\dev_code\room_schedule\Room_Schedule\bin\Release\EntityFramework.SqlServer.dll
+C:\Users\DeChache\Documents\dev_code\room_schedule\Room_Schedule\bin\Release\System.Data.SQLite.dll
+C:\Users\DeChache\Documents\dev_code\room_schedule\Room_Schedule\bin\Release\System.Data.SQLite.EF6.dll
+C:\Users\DeChache\Documents\dev_code\room_schedule\Room_Schedule\bin\Release\System.Data.SQLite.Linq.dll
+C:\Users\DeChache\Documents\dev_code\room_schedule\Room_Schedule\bin\Release\EntityFramework.xml
+C:\Users\DeChache\Documents\dev_code\room_schedule\Room_Schedule\bin\Release\EntityFramework.SqlServer.xml
+C:\Users\DeChache\Documents\dev_code\room_schedule\Room_Schedule\bin\Release\System.Data.SQLite.xml
