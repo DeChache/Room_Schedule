@@ -31,3 +31,16 @@ C:\Users\DeChache\Documents\dev_code\room_schedule\Room_Schedule\obj\Debug\Room_
 C:\Users\DeChache\Documents\dev_code\room_schedule\Room_Schedule\obj\Debug\Room_Schedule.Form2.resources
 C:\Users\DeChache\Documents\dev_code\room_schedule\Room_Schedule\obj\Debug\Room_Schedule.Properties.Resources.resources
 C:\Users\DeChache\Documents\dev_code\room_schedule\Room_Schedule\obj\Debug\Room_Schedule.csproj.GenerateResource.Cache
+C:\Users\DeChache\Documents\dev_code\room_schedule\Room_Schedule\bin\Debug\Room_Schedule.exe.manifest
+C:\Users\DeChache\Documents\dev_code\room_schedule\Room_Schedule\bin\Debug\Room_Schedule.application
+C:\Users\DeChache\Documents\dev_code\room_schedule\Room_Schedule\bin\Debug\EntityFramework.dll
+C:\Users\DeChache\Documents\dev_code\room_schedule\Room_Schedule\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\DeChache\Documents\dev_code\room_schedule\Room_Schedule\bin\Debug\System.Data.SQLite.dll
+C:\Users\DeChache\Documents\dev_code\room_schedule\Room_Schedule\bin\Debug\System.Data.SQLite.EF6.dll
+C:\Users\DeChache\Documents\dev_code\room_schedule\Room_Schedule\bin\Debug\System.Data.SQLite.Linq.dll
+C:\Users\DeChache\Documents\dev_code\room_schedule\Room_Schedule\bin\Debug\EntityFramework.xml
+C:\Users\DeChache\Documents\dev_code\room_schedule\Room_Schedule\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\DeChache\Documents\dev_code\room_schedule\Room_Schedule\bin\Debug\System.Data.SQLite.xml
+C:\Users\DeChache\Documents\dev_code\room_schedule\Room_Schedule\obj\Debug\Room_Schedule.TrustInfo.xml
+C:\Users\DeChache\Documents\dev_code\room_schedule\Room_Schedule\obj\Debug\Room_Schedule.exe.manifest
+C:\Users\DeChache\Documents\dev_code\room_schedule\Room_Schedule\obj\Debug\Room_Schedule.application

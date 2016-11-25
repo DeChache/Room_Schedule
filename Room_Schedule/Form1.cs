@@ -118,10 +118,11 @@ namespace Room_Schedule
             schedule_nice.Columns.Add("Index");
             schedule_nice.Columns.Add("Date");
             schedule_nice.Columns.Add("Time");
-            schedule_nice.Columns.Add("Room");
-            schedule_nice.Columns.Add("Description1");
-            schedule_nice.Columns.Add("Description2");
-            schedule_nice.Columns.Add("Description3");
+            schedule_nice.Columns.Add("PT-1");
+            schedule_nice.Columns.Add("PT-2");
+            schedule_nice.Columns.Add("PT-3");
+            schedule_nice.Columns.Add("RT");
+            schedule_nice.Columns.Add("IS/CPT");
         }
 
         public void refreshDataDisplay(int Date)
@@ -160,10 +161,11 @@ namespace Room_Schedule
                 Human_data["Index"] = data["Index"];
                 Human_data["Date"] = display_date;
                 Human_data["Time"] = data["ScheduleTime"];
-                Human_data["Room"] = data["Room"];
-                Human_data["Description1"] = data["Description1"];
-                Human_data["Description2"] = data["Description2"];
-                Human_data["Description3"] = data["Description3"];
+                Human_data["PT-1"] = data["PT-1"];
+                Human_data["PT-2"] = data["PT-2"];
+                Human_data["PT-3"] = data["PT-3"];
+                Human_data["RT"] = data["RT"];
+                Human_data["IS/CPT"] = data["IS/CPT"];
                 schedule_nice.Rows.Add(Human_data);
                 //MessageBox.Show("The row data is " + data) ;
 
@@ -178,10 +180,11 @@ namespace Room_Schedule
 
         public void initializePrintTable()
         {
-            schedule_print.Columns.Add("Description3");
-            schedule_print.Columns.Add("Description2");
-            schedule_print.Columns.Add("Description1");
-            schedule_print.Columns.Add("Room");
+            schedule_print.Columns.Add("IS/CPT");
+            schedule_print.Columns.Add("RT");
+            schedule_print.Columns.Add("PT-3");
+            schedule_print.Columns.Add("PT-2");
+            schedule_print.Columns.Add("PT-1");
             schedule_print.Columns.Add("Time");
             schedule_print.Columns.Add("Date");
                        
@@ -222,10 +225,11 @@ namespace Room_Schedule
                 DataRow Print_data = schedule_print.NewRow();
                 Print_data["Date"] = display_date;
                 Print_data["Time"] = data["ScheduleTime"];
-                Print_data["Room"] = data["Room"];
-                Print_data["Description1"] = data["Description1"];
-                Print_data["Description2"] = data["Description2"];
-                Print_data["Description3"] = data["Description3"];
+                Print_data["PT-1"] = data["PT-1"];
+                Print_data["PT-2"] = data["PT-2"];
+                Print_data["PT-3"] = data["PT-3"];
+                Print_data["RT"] = data["RT"];
+                Print_data["IS/CPT"] = data["IS/CPT"];
                 schedule_print.Rows.Add(Print_data);
                 //MessageBox.Show("The row data is " + data) ;
 
@@ -251,7 +255,8 @@ namespace Room_Schedule
                 m_dbConnection = new SQLiteConnection("Data Source=room_schedule.db;Version=3;");
                 m_dbConnection.Open();
 
-                string createTables = "CREATE TABLE \"Room_Schedule\" ('Index'INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE,'ScheduleDate'INTEGER NOT NULL,'ScheduleTime'	TEXT,'Room'	TEXT,'Description1'	TEXT,'Description2'	TEXT,'Description3'	TEXT)";
+                //string createTables = "CREATE TABLE \"Room_Schedule\" ('Index'INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE,'ScheduleDate'INTEGER NOT NULL,'ScheduleTime' TEXT,'Room' TEXT,'Description1' TEXT,'Description2' TEXT,'Description3' TEXT)";
+                string createTables = "CREATE TABLE \"Room_Schedule\" ('Index'INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE,'ScheduleDate'INTEGER NOT NULL,'ScheduleTime' TEXT,'PT-1' TEXT,'PT-2' TEXT,'PT-3 TEXT,'RT' TEXT,[IS/CPT] TEXT)";
 
                 SQLiteCommand command = new SQLiteCommand(createTables, m_dbConnection);
                 command.ExecuteNonQuery();
