@@ -44,7 +44,7 @@ namespace Room_Schedule
             {
                 
                 string sDate = newData["Date"].ToString();
-                string sRoom = newData["Room"].ToString();
+                string sRoom = newData["PT-1"].ToString();
                 string sTime = newData["Time"].ToString();
                 int insert_UNIX; 
          
@@ -68,7 +68,7 @@ namespace Room_Schedule
                 if (indexLength.Equals(0))
                 {
                     
-                    dataInsert.CommandText = "Insert INTO Room_Schedule (ScheduleDate,ScheduleTime,Room,Description1,Description2,Description3) VALUES ('" + insert_UNIX + "','" + newData["Time"] + "','" + newData["Room"] + "','" + newData["Description1"] + "','" + newData["Description2"] + "','" + newData["Description3"] + "');";
+                    dataInsert.CommandText = "Insert INTO Room_Schedule (ScheduleDate,ScheduleTime,'PT-1','PT-2','PT-3','RT','IS-CPT') VALUES ('" + insert_UNIX + "','" + newData["Time"] + "','" + newData["PT-1"] + "','" + newData["PT-2"] + "','" + newData["PT-3"] + "','" + newData["RT"] + "','" + newData["IS-CPT"] + "');";
                     dataInsert.ExecuteNonQuery();
                     MessageBox.Show("Schedule Has Been Saved");
 
@@ -76,7 +76,7 @@ namespace Room_Schedule
                 else if (indexLength > 0 )
                 {
                     int indexNumber = Convert.ToInt32(newData["Index"]);
-                    dataInsert.CommandText = "Update Room_Schedule Set ScheduleDate ='" + insert_UNIX + "', ScheduleTime='" + newData["Time"] + "',Room='" + newData["Room"] + "', Description1='" + newData["Description1"] + "',Description2='" + newData["Description2"] + "',Description3='" + newData["Description3"] + "' Where ScheduleDate = '" + insert_UNIX + "' and ScheduleTime ='" + newData["Time"] + "' and Room ='" + newData["Room"] + "';";
+                    dataInsert.CommandText = "Update Room_Schedule Set ScheduleDate ='" + insert_UNIX + "', ScheduleTime='" + newData["Time"] + "','PT-1'='" + newData["PT-1"] + "', 'PT-2'='" + newData["PT-2"] + "','PT-3'='" + newData["PT-3"] + "',RT='" + newData["RT"] + "','IS-CPT'='" + newData["IS-CPT"] + "' Where ScheduleDate = '" + insert_UNIX + "' and ScheduleTime ='" + newData["Time"] + "';";
                     dataInsert.ExecuteNonQuery();
                     MessageBox.Show("Schedule Has Been Saved");
 
@@ -257,7 +257,7 @@ namespace Room_Schedule
 
                 //string createTables = "CREATE TABLE \"Room_Schedule\" ('Index'INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE,'ScheduleDate'INTEGER NOT NULL,'ScheduleTime' TEXT,'Room' TEXT,'Description1' TEXT,'Description2' TEXT,'Description3' TEXT)";
                 //string createTables = "CREATE TABLE \"Room_Schedule\" ('Index'INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE,'ScheduleDate'INTEGER NOT NULL,'ScheduleTime' TEXT,'PT-1' TEXT,'PT-2' TEXT,'PT-3 TEXT,'RT' TEXT, 'IS_CPT' TEXT )";
-                string createTables = "CREATE TABLE \"Room_Schedule\" ('Index' INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE,'ScheduleDate' INTEGER,'ScheduleTime'	TEXT, 'PT - 1'	TEXT, 'PT - 2'	TEXT, 'PT - 3'	TEXT, 'RT'	TEXT, 'IS-CPT'	TEXT)";
+                string createTables = "CREATE TABLE \"Room_Schedule\" ('Index' INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE,'ScheduleDate' INTEGER,'ScheduleTime'	TEXT, 'PT-1'	TEXT, 'PT-2'	TEXT, 'PT-3'	TEXT, 'RT'	TEXT, 'IS-CPT'	TEXT)";
                 SQLiteCommand command = new SQLiteCommand(createTables, m_dbConnection);
                 command.ExecuteNonQuery();
 
