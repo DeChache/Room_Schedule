@@ -122,7 +122,7 @@ namespace Room_Schedule
             schedule_nice.Columns.Add("PT-2");
             schedule_nice.Columns.Add("PT-3");
             schedule_nice.Columns.Add("RT");
-            schedule_nice.Columns.Add("IS/CPT");
+            schedule_nice.Columns.Add("IS-CPT");
         }
 
         public void refreshDataDisplay(int Date)
@@ -165,7 +165,7 @@ namespace Room_Schedule
                 Human_data["PT-2"] = data["PT-2"];
                 Human_data["PT-3"] = data["PT-3"];
                 Human_data["RT"] = data["RT"];
-                Human_data["IS/CPT"] = data["IS/CPT"];
+                Human_data["IS-CPT"] = data["IS-CPT"];
                 schedule_nice.Rows.Add(Human_data);
                 //MessageBox.Show("The row data is " + data) ;
 
@@ -180,7 +180,7 @@ namespace Room_Schedule
 
         public void initializePrintTable()
         {
-            schedule_print.Columns.Add("IS/CPT");
+            schedule_print.Columns.Add("IS-CPT");
             schedule_print.Columns.Add("RT");
             schedule_print.Columns.Add("PT-3");
             schedule_print.Columns.Add("PT-2");
@@ -229,7 +229,7 @@ namespace Room_Schedule
                 Print_data["PT-2"] = data["PT-2"];
                 Print_data["PT-3"] = data["PT-3"];
                 Print_data["RT"] = data["RT"];
-                Print_data["IS/CPT"] = data["IS/CPT"];
+                Print_data["IS-CPT"] = data["IS-CPT"];
                 schedule_print.Rows.Add(Print_data);
                 //MessageBox.Show("The row data is " + data) ;
 
@@ -256,8 +256,8 @@ namespace Room_Schedule
                 m_dbConnection.Open();
 
                 //string createTables = "CREATE TABLE \"Room_Schedule\" ('Index'INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE,'ScheduleDate'INTEGER NOT NULL,'ScheduleTime' TEXT,'Room' TEXT,'Description1' TEXT,'Description2' TEXT,'Description3' TEXT)";
-                string createTables = "CREATE TABLE \"Room_Schedule\" ('Index'INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE,'ScheduleDate'INTEGER NOT NULL,'ScheduleTime' TEXT,'PT-1' TEXT,'PT-2' TEXT,'PT-3 TEXT,'RT' TEXT,[IS/CPT] TEXT)";
-
+                //string createTables = "CREATE TABLE \"Room_Schedule\" ('Index'INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE,'ScheduleDate'INTEGER NOT NULL,'ScheduleTime' TEXT,'PT-1' TEXT,'PT-2' TEXT,'PT-3 TEXT,'RT' TEXT, 'IS_CPT' TEXT )";
+                string createTables = "CREATE TABLE \"Room_Schedule\" ('Index' INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE,'ScheduleDate' INTEGER,'ScheduleTime'	TEXT, 'PT - 1'	TEXT, 'PT - 2'	TEXT, 'PT - 3'	TEXT, 'RT'	TEXT, 'IS-CPT'	TEXT)";
                 SQLiteCommand command = new SQLiteCommand(createTables, m_dbConnection);
                 command.ExecuteNonQuery();
 
