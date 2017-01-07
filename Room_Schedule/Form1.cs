@@ -206,7 +206,7 @@ namespace Room_Schedule
                 dataGridView1.DataSource = schedule_nice;
                 dataGridView1.AutoGenerateColumns = false;
                 dataGridView1.Columns["Index"].Visible = false;
-
+            
 
         }
 
