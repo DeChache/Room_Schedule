@@ -319,7 +319,9 @@ namespace Room_Schedule
             DateTimeOffset selectedDateTime = new DateTimeOffset(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month, dateTimePicker1.Value.Day, 0, 0, 0, TimeSpan.Zero);
             int Print_UNIX = (int)selectedDateTime.ToUnixTimeSeconds();
             printDataDisplay(Print_UNIX);
-            ClsPrint _ClsPrint = new ClsPrint(dataGridView2, "Schedule");
+            DateTimeOffset printDateTime = new DateTimeOffset(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month, dateTimePicker1.Value.Day, 0, 0, 0, TimeSpan.Zero);
+            String print_date = printDateTime.Month + "/" + printDateTime.Day + "/" + printDateTime.Year;
+            ClsPrint _ClsPrint = new ClsPrint(dataGridView2, print_date);
             _ClsPrint.PrintForm();
             schedule_print.Clear();
         }
@@ -328,7 +330,9 @@ namespace Room_Schedule
         {
             //initializePrintTable();           
             printDataDisplay(getUnixTime());
-            ClsPrint _ClsPrint = new ClsPrint(dataGridView2, "Schedule");
+            DateTimeOffset printDateTime = new DateTimeOffset(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month, dateTimePicker1.Value.Day, 0, 0, 0, TimeSpan.Zero);
+            String print_date = printDateTime.Month + "/" + printDateTime.Day + "/" + printDateTime.Year;
+            ClsPrint _ClsPrint = new ClsPrint(dataGridView2, print_date);
             _ClsPrint.PrintForm();
         }
 
@@ -385,7 +389,8 @@ namespace Room_Schedule
                 //try
                 //{
                 //Set the left margin
-                int iLeftMargin = e.MarginBounds.Left;
+               // int iLeftMargin = e.MarginBounds.Left;
+                int iLeftMargin = 10;
                 //Set the top margin
                 int iTopMargin = e.MarginBounds.Top;
                 //Whether more pages have to print or not
@@ -405,6 +410,7 @@ namespace Room_Schedule
                             GridCol.InheritedStyle.Font, iTmpWidth).Height) + 11;
 
                         // Save width and height of headers
+                        iTmpWidth = 119;
                         arrColumnLefts.Add(iLeftMargin);
                         arrColumnWidths.Add(iTmpWidth);
                         iLeftMargin += iTmpWidth;
@@ -415,7 +421,7 @@ namespace Room_Schedule
                 {
                     DataGridViewRow GridRow = gw.Rows[iRow];
                     //Set the cell height
-                    iCellHeight = GridRow.Height + 5;
+                    iCellHeight = GridRow.Height + 50;
                     int iCount = 0;
                     //Check whether the current page settings allows more rows to print
                     if (iTopMargin + iCellHeight >= e.MarginBounds.Height + e.MarginBounds.Top)
