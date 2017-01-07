@@ -70,7 +70,7 @@ namespace Room_Schedule
                     
                     dataInsert.CommandText = "Insert INTO Room_Schedule (ScheduleDate,ScheduleTime,'PT-1','PT-2','PT-3','RT','IS-CPT') VALUES ('" + insert_UNIX + "','" + newData["Time"] + "','" + newData["PT-1"] + "','" + newData["PT-2"] + "','" + newData["PT-3"] + "','" + newData["RT"] + "','" + newData["IS-CPT"] + "');";
                     dataInsert.ExecuteNonQuery();
-                    MessageBox.Show("Schedule Has Been Saved");
+                    //MessageBox.Show("Schedule Has Been Saved");
 
                 }
                 else if (indexLength > 0 )
@@ -78,7 +78,7 @@ namespace Room_Schedule
                     int indexNumber = Convert.ToInt32(newData["Index"]);
                     dataInsert.CommandText = "Update Room_Schedule Set ScheduleDate ='" + insert_UNIX + "', ScheduleTime='" + newData["Time"] + "','PT-1'='" + newData["PT-1"] + "', 'PT-2'='" + newData["PT-2"] + "','PT-3'='" + newData["PT-3"] + "',RT='" + newData["RT"] + "','IS-CPT'='" + newData["IS-CPT"] + "' Where ScheduleDate = '" + insert_UNIX + "' and ScheduleTime ='" + newData["Time"] + "';";
                     dataInsert.ExecuteNonQuery();
-                    MessageBox.Show("Schedule Has Been Saved");
+                    //MessageBox.Show("Schedule Has Been Saved");
 
                 }
                 else if (count == rowToInsert)
@@ -92,9 +92,9 @@ namespace Room_Schedule
 
 
             }
+            MessageBox.Show("Schedule Has Been Saved");
 
-           
-            
+
 
         }
 
@@ -148,13 +148,17 @@ namespace Room_Schedule
                 String display_today = Today.Month + "/" + Today.Day + "/" + Today.Year;
 
                 int index = 0;
+                TimeSpan startTime = new TimeSpan(7,15,00);
 
-                while (index < 8)
+                while (index < 11)
                 {
+                    DateTime time = DateTime.Today.Add(startTime);
+                    string displayTodayTime = time.ToString("hh:mm tt");
+
                     DataRow Human_data = schedule_nice.NewRow();
                     Human_data["Index"] = null;
                     Human_data["Date"] = display_today;
-                    Human_data["Time"] = $Hour;
+                    Human_data["Time"] = displayTodayTime;
                     Human_data["PT-1"] = "";
                     Human_data["PT-2"] = "";
                     Human_data["PT-3"] = "";
@@ -163,6 +167,7 @@ namespace Room_Schedule
                     schedule_nice.Rows.Add(Human_data);
 
                     index = index + 1;
+                    startTime = startTime + TimeSpan.FromHours(1);
                 }
 
             }
