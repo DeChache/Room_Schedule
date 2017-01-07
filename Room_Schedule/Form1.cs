@@ -140,40 +140,67 @@ namespace Room_Schedule
             dataRetrieve.CommandText = "Select * from Room_Schedule where ScheduleDate="+Date+";";
             SQLiteDataAdapter scheduleData = new SQLiteDataAdapter(dataRetrieve);
             scheduleData.Fill(schedule);
-            foreach (DataRow data in schedule.Rows)
+            if (schedule.Rows.Count.Equals(0))
             {
-                //Convert date from Unix time to human readable time
-                int unix_date = Convert.ToInt32(data["ScheduleDate"]);
-                DateTimeOffset standard_date = DateTimeOffset.FromUnixTimeSeconds(unix_date);
+                //Autopopulate the times for a new day
+                int unix_today = Convert.ToInt32(Date);
+                DateTimeOffset Today = DateTimeOffset.FromUnixTimeSeconds(unix_today);
+                String display_today = Today.Month + "/" + Today.Day + "/" + Today.Year;
 
-                //Convert time from Unix time to human readable time
-                //int unix_time = Convert.ToInt32(data["ScheduleTime"]);
-                //DateTimeOffset standard_time = DateTimeOffset.FromUnixTimeSeconds(unix_time);
-                //DateTime standard_12_hour = standard_time; 
+                int index = 0;
 
-                //Convert datetime to string
-                //DateTime Local_Time = standard_time.DateTime;
-                String display_date = standard_date.Month + "/" + standard_date.Day + "/" + standard_date.Year;
-                //String display_time = Local_Time.ToString("hh" + ":" + "mm" + "tt");
+                while (index < 8)
+                {
+                    DataRow Human_data = schedule_nice.NewRow();
+                    Human_data["Index"] = null;
+                    Human_data["Date"] = display_today;
+                    Human_data["Time"] = $Hour;
+                    Human_data["PT-1"] = "";
+                    Human_data["PT-2"] = "";
+                    Human_data["PT-3"] = "";
+                    Human_data["RT"] = "";
+                    Human_data["IS-CPT"] = "";
+                    schedule_nice.Rows.Add(Human_data);
 
-                //Add data to nice data table
-                DataRow Human_data = schedule_nice.NewRow();
-                Human_data["Index"] = data["Index"];
-                Human_data["Date"] = display_date;
-                Human_data["Time"] = data["ScheduleTime"];
-                Human_data["PT-1"] = data["PT-1"];
-                Human_data["PT-2"] = data["PT-2"];
-                Human_data["PT-3"] = data["PT-3"];
-                Human_data["RT"] = data["RT"];
-                Human_data["IS-CPT"] = data["IS-CPT"];
-                schedule_nice.Rows.Add(Human_data);
-                //MessageBox.Show("The row data is " + data) ;
+                    index = index + 1;
+                }
 
             }
+            else
+                foreach (DataRow data in schedule.Rows)
+                {
+                    //Convert date from Unix time to human readable time
+                    int unix_date = Convert.ToInt32(data["ScheduleDate"]);
+                    DateTimeOffset standard_date = DateTimeOffset.FromUnixTimeSeconds(unix_date);
 
-            dataGridView1.DataSource = schedule_nice;
-            dataGridView1.AutoGenerateColumns = false;
-            dataGridView1.Columns["Index"].Visible = false;
+                    //Convert time from Unix time to human readable time
+                    //int unix_time = Convert.ToInt32(data["ScheduleTime"]);
+                    //DateTimeOffset standard_time = DateTimeOffset.FromUnixTimeSeconds(unix_time);
+                    //DateTime standard_12_hour = standard_time; 
+
+                    //Convert datetime to string
+                    //DateTime Local_Time = standard_time.DateTime;
+                    String display_date = standard_date.Month + "/" + standard_date.Day + "/" + standard_date.Year;
+                    //String display_time = Local_Time.ToString("hh" + ":" + "mm" + "tt");
+
+                    //Add data to nice data table
+                    DataRow Human_data = schedule_nice.NewRow();
+                    Human_data["Index"] = data["Index"];
+                    Human_data["Date"] = display_date;
+                    Human_data["Time"] = data["ScheduleTime"];
+                    Human_data["PT-1"] = data["PT-1"];
+                    Human_data["PT-2"] = data["PT-2"];
+                    Human_data["PT-3"] = data["PT-3"];
+                    Human_data["RT"] = data["RT"];
+                    Human_data["IS-CPT"] = data["IS-CPT"];
+                    schedule_nice.Rows.Add(Human_data);
+                    //MessageBox.Show("The row data is " + data) ;
+                }
+            
+
+                dataGridView1.DataSource = schedule_nice;
+                dataGridView1.AutoGenerateColumns = false;
+                dataGridView1.Columns["Index"].Visible = false;
 
 
         }
