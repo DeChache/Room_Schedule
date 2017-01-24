@@ -115,6 +115,7 @@
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.dataGridView1.Location = new System.Drawing.Point(185, 35);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.dataGridView1.MaximumSize = new System.Drawing.Size(3840, 2160);
@@ -125,7 +126,7 @@
             this.dataGridView1.Size = new System.Drawing.Size(800, 600);
             this.dataGridView1.StandardTab = true;
             this.dataGridView1.TabIndex = 4;
-            this.dataGridView1.UseWaitCursor = true;
+            this.dataGridView1.UseWaitCursor = false;
             // 
             // dateTimePicker1
             // 

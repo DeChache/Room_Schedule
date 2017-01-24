@@ -150,7 +150,7 @@ namespace Room_Schedule
                 int index = 0;
                 TimeSpan startTime = new TimeSpan(7,15,00);
 
-                while (index < 11)
+                while (index < 46)
                 {
                     DateTime time = DateTime.Today.Add(startTime);
                     string displayTodayTime = time.ToString("hh:mm tt");
@@ -167,7 +167,7 @@ namespace Room_Schedule
                     schedule_nice.Rows.Add(Human_data);
 
                     index = index + 1;
-                    startTime = startTime + TimeSpan.FromHours(1);
+                    startTime = startTime + TimeSpan.FromMinutes(15);
                 }
 
             }
