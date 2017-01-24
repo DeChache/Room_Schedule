@@ -150,7 +150,7 @@ namespace Room_Schedule
                 int index = 0;
                 TimeSpan startTime = new TimeSpan(7,15,00);
 
-                while (index < 46)
+                while (index < 39)
                 {
                     DateTime time = DateTime.Today.Add(startTime);
                     string displayTodayTime = time.ToString("hh:mm tt");
