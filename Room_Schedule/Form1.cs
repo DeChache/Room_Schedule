@@ -68,7 +68,7 @@ namespace Room_Schedule
                 if (indexLength.Equals(0))
                 {
                     
-                    dataInsert.CommandText = "Insert INTO Room_Schedule (ScheduleDate,ScheduleTime,'PT-1','PT-2','PT-3','RT','IS-CPT') VALUES ('" + insert_UNIX + "','" + newData["Time"] + "','" + newData["PT-1"] + "','" + newData["PT-2"] + "','" + newData["PT-3"] + "','" + newData["RT"] + "','" + newData["IS-CPT"] + "');";
+                    dataInsert.CommandText = "Insert INTO Room_Schedule (ScheduleDate,ScheduleTime,'PT-1','PT-2','PT-3','RT','IS-CPT') VALUES ('" + insert_UNIX + "','" + newData["Time"] + "','" + newData["PT-1"] + "','" + newData["PT-2"] + "','" + newData["PT-3"] + "','" + newData["PT-IP"] + "','" + newData["RT"] + "','" + newData["IS-CPT"] + "');";
                     dataInsert.ExecuteNonQuery();
                     //MessageBox.Show("Schedule Has Been Saved");
 
@@ -76,7 +76,7 @@ namespace Room_Schedule
                 else if (indexLength > 0 )
                 {
                     int indexNumber = Convert.ToInt32(newData["Index"]);
-                    dataInsert.CommandText = "Update Room_Schedule Set ScheduleDate ='" + insert_UNIX + "', ScheduleTime='" + newData["Time"] + "','PT-1'='" + newData["PT-1"] + "', 'PT-2'='" + newData["PT-2"] + "','PT-3'='" + newData["PT-3"] + "',RT='" + newData["RT"] + "','IS-CPT'='" + newData["IS-CPT"] + "' Where ScheduleDate = '" + insert_UNIX + "' and ScheduleTime ='" + newData["Time"] + "';";
+                    dataInsert.CommandText = "Update Room_Schedule Set ScheduleDate ='" + insert_UNIX + "', ScheduleTime='" + newData["Time"] + "','PT-1'='" + newData["PT-1"] + "', 'PT-2'='" + newData["PT-2"] + "','PT-3'='" + newData["PT-3"] + "','PT-IP'='" + newData["PT-IP"] + "',RT='" + newData["RT"] + "','IS-CPT'='" + newData["IS-CPT"] + "' Where ScheduleDate = '" + insert_UNIX + "' and ScheduleTime ='" + newData["Time"] + "';";
                     dataInsert.ExecuteNonQuery();
                     //MessageBox.Show("Schedule Has Been Saved");
 
@@ -121,6 +121,7 @@ namespace Room_Schedule
             schedule_nice.Columns.Add("PT-1");
             schedule_nice.Columns.Add("PT-2");
             schedule_nice.Columns.Add("PT-3");
+            schedule_nice.Columns.Add("PT-IP");
             schedule_nice.Columns.Add("RT");
             schedule_nice.Columns.Add("IS-CPT");
         }
@@ -162,6 +163,7 @@ namespace Room_Schedule
                     Human_data["PT-1"] = "";
                     Human_data["PT-2"] = "";
                     Human_data["PT-3"] = "";
+                    Human_data["PT-IP"] = "";
                     Human_data["RT"] = "";
                     Human_data["IS-CPT"] = "";
                     schedule_nice.Rows.Add(Human_data);
@@ -196,6 +198,7 @@ namespace Room_Schedule
                     Human_data["PT-1"] = data["PT-1"];
                     Human_data["PT-2"] = data["PT-2"];
                     Human_data["PT-3"] = data["PT-3"];
+                    Human_data["PT-IP"] = data["PT-IP"];
                     Human_data["RT"] = data["RT"];
                     Human_data["IS-CPT"] = data["IS-CPT"];
                     schedule_nice.Rows.Add(Human_data);
@@ -206,7 +209,8 @@ namespace Room_Schedule
                 dataGridView1.DataSource = schedule_nice;
                 dataGridView1.AutoGenerateColumns = false;
                 dataGridView1.Columns["Index"].Visible = false;
-            
+                dataGridView1.Columns["Date"].Visible = false;
+
 
         }
 
@@ -214,11 +218,12 @@ namespace Room_Schedule
         {
             schedule_print.Columns.Add("IS-CPT");
             schedule_print.Columns.Add("RT");
+            schedule_print.Columns.Add("PT-IP");
             schedule_print.Columns.Add("PT-3");
             schedule_print.Columns.Add("PT-2");
             schedule_print.Columns.Add("PT-1");
             schedule_print.Columns.Add("Time");
-            schedule_print.Columns.Add("Date");
+           
                        
         }
 
@@ -255,11 +260,11 @@ namespace Room_Schedule
 
                 //Add data to nice data table
                 DataRow Print_data = schedule_print.NewRow();
-                Print_data["Date"] = display_date;
                 Print_data["Time"] = data["ScheduleTime"];
                 Print_data["PT-1"] = data["PT-1"];
                 Print_data["PT-2"] = data["PT-2"];
                 Print_data["PT-3"] = data["PT-3"];
+                Print_data["PT-IP"] = data["PT-IP"];
                 Print_data["RT"] = data["RT"];
                 Print_data["IS-CPT"] = data["IS-CPT"];
                 schedule_print.Rows.Add(Print_data);
@@ -289,7 +294,7 @@ namespace Room_Schedule
 
                 //string createTables = "CREATE TABLE \"Room_Schedule\" ('Index'INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE,'ScheduleDate'INTEGER NOT NULL,'ScheduleTime' TEXT,'Room' TEXT,'Description1' TEXT,'Description2' TEXT,'Description3' TEXT)";
                 //string createTables = "CREATE TABLE \"Room_Schedule\" ('Index'INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE,'ScheduleDate'INTEGER NOT NULL,'ScheduleTime' TEXT,'PT-1' TEXT,'PT-2' TEXT,'PT-3 TEXT,'RT' TEXT, 'IS_CPT' TEXT )";
-                string createTables = "CREATE TABLE \"Room_Schedule\" ('Index' INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE,'ScheduleDate' INTEGER,'ScheduleTime'	TEXT, 'PT-1'	TEXT, 'PT-2'	TEXT, 'PT-3'	TEXT, 'RT'	TEXT, 'IS-CPT'	TEXT)";
+                string createTables = "CREATE TABLE \"Room_Schedule\" ('Index' INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE,'ScheduleDate' INTEGER,'ScheduleTime'	TEXT, 'PT-1'	TEXT, 'PT-2'	TEXT, 'PT-3'	TEXT, 'PT-IP'	TEXT, 'RT'	TEXT, 'IS-CPT'	TEXT)";
                 SQLiteCommand command = new SQLiteCommand(createTables, m_dbConnection);
                 command.ExecuteNonQuery();
 
@@ -316,14 +321,21 @@ namespace Room_Schedule
         {
             //printDocument1.Print();
             //initializePrintTable();
-            DateTimeOffset selectedDateTime = new DateTimeOffset(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month, dateTimePicker1.Value.Day, 0, 0, 0, TimeSpan.Zero);
-            int Print_UNIX = (int)selectedDateTime.ToUnixTimeSeconds();
-            printDataDisplay(Print_UNIX);
-            DateTimeOffset printDateTime = new DateTimeOffset(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month, dateTimePicker1.Value.Day, 0, 0, 0, TimeSpan.Zero);
-            String print_date = printDateTime.Month + "/" + printDateTime.Day + "/" + printDateTime.Year;
-            ClsPrint _ClsPrint = new ClsPrint(dataGridView2, print_date);
-            _ClsPrint.PrintForm();
-            schedule_print.Clear();
+            try
+            {
+                DateTimeOffset selectedDateTime = new DateTimeOffset(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month, dateTimePicker1.Value.Day, 0, 0, 0, TimeSpan.Zero);
+                int Print_UNIX = (int)selectedDateTime.ToUnixTimeSeconds();
+                printDataDisplay(Print_UNIX);
+                DateTimeOffset printDateTime = new DateTimeOffset(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month, dateTimePicker1.Value.Day, 0, 0, 0, TimeSpan.Zero);
+                String print_date = printDateTime.Month + "/" + printDateTime.Day + "/" + printDateTime.Year;
+                ClsPrint _ClsPrint = new ClsPrint(dataGridView2, print_date);
+                _ClsPrint.PrintForm();
+                schedule_print.Clear();
+            }
+            catch
+            {
+                MessageBox.Show("There is a problemm with your printer. Please verify your default printer");
+            }
         }
 
         private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
