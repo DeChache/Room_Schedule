@@ -68,7 +68,7 @@ namespace Room_Schedule
                 if (indexLength.Equals(0))
                 {
                     
-                    dataInsert.CommandText = "Insert INTO Room_Schedule (ScheduleDate,ScheduleTime,'PT-1','PT-2','PT-3','RT','IS-CPT') VALUES ('" + insert_UNIX + "','" + newData["Time"] + "','" + newData["PT-1"] + "','" + newData["PT-2"] + "','" + newData["PT-3"] + "','" + newData["PT-IP"] + "','" + newData["RT"] + "','" + newData["IS-CPT"] + "');";
+                    dataInsert.CommandText = "Insert INTO Room_Schedule (ScheduleDate,ScheduleTime,'PT-1','PT-2','PT-3','PT-IP','RT','IS-CPT') VALUES ('" + insert_UNIX + "','" + newData["Time"] + "','" + newData["PT-1"] + "','" + newData["PT-2"] + "','" + newData["PT-3"] + "','" + newData["PT-IP"] + "','" + newData["RT"] + "','" + newData["IS-CPT"] + "');";
                     dataInsert.ExecuteNonQuery();
                     //MessageBox.Show("Schedule Has Been Saved");
 
@@ -149,9 +149,9 @@ namespace Room_Schedule
                 String display_today = Today.Month + "/" + Today.Day + "/" + Today.Year;
 
                 int index = 0;
-                TimeSpan startTime = new TimeSpan(7,15,00);
+                TimeSpan startTime = new TimeSpan(7,00,00);
 
-                while (index < 39)
+                while (index < 41)
                 {
                     DateTime time = DateTime.Today.Add(startTime);
                     string displayTodayTime = time.ToString("hh:mm tt");
