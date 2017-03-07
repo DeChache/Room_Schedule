@@ -34,64 +34,7 @@ namespace Room_Schedule
 
         private void button1_Click(object sender, EventArgs e)
         {
-            SQLiteConnection m_dbConnection;
-            m_dbConnection = new SQLiteConnection("Data Source=room_schedule.db;Version=3;");
-            m_dbConnection.Open();
-            var dataInsert = new SQLiteCommand(m_dbConnection);
-            int count = 0;
-            int rowToInsert = schedule_nice.Rows.Count;
-            foreach (DataRow newData in schedule_nice.Rows)
-            {
-                
-                string sDate = newData["Date"].ToString();
-                string sRoom = newData["PT-1"].ToString();
-                string sTime = newData["Time"].ToString();
-                int insert_UNIX; 
-         
-                try
-                {
-                    DateTime dt = Convert.ToDateTime(sDate);
-                    DateTimeOffset insertDateTime = new DateTimeOffset(dt.Year, dt.Month, dt.Day, 0, 0, 0, TimeSpan.Zero);
-                    insert_UNIX = (int)insertDateTime.ToUnixTimeSeconds();
-                }
-                catch
-                {
-                    MessageBox.Show("Please enter a Valid Date in the form of MM/DD/YY Please check the following record Date:" + sDate + " Room:" + sRoom + " Time:" + sTime);
-                    dataGridView1.DataSource = schedule_nice;
-                    dataGridView1.AutoGenerateColumns = false;
-                    dataGridView1.Columns["Index"].Visible = false;
-                    break;
-                }
-                
-                string indexValue = newData["Index"].ToString();
-                int indexLength = indexValue.Length;
-                if (indexLength.Equals(0))
-                {
-                    
-                    dataInsert.CommandText = "Insert INTO Room_Schedule (ScheduleDate,ScheduleTime,'PT-1','PT-2','PT-3','PT-IP','RT','IS-CPT') VALUES ('" + insert_UNIX + "','" + newData["Time"] + "','" + newData["PT-1"] + "','" + newData["PT-2"] + "','" + newData["PT-3"] + "','" + newData["PT-IP"] + "','" + newData["RT"] + "','" + newData["IS-CPT"] + "');";
-                    dataInsert.ExecuteNonQuery();
-                    //MessageBox.Show("Schedule Has Been Saved");
-
-                }
-                else if (indexLength > 0 )
-                {
-                    int indexNumber = Convert.ToInt32(newData["Index"]);
-                    dataInsert.CommandText = "Update Room_Schedule Set ScheduleDate ='" + insert_UNIX + "', ScheduleTime='" + newData["Time"] + "','PT-1'='" + newData["PT-1"] + "', 'PT-2'='" + newData["PT-2"] + "','PT-3'='" + newData["PT-3"] + "','PT-IP'='" + newData["PT-IP"] + "',RT='" + newData["RT"] + "','IS-CPT'='" + newData["IS-CPT"] + "' Where ScheduleDate = '" + insert_UNIX + "' and ScheduleTime ='" + newData["Time"] + "';";
-                    dataInsert.ExecuteNonQuery();
-                    //MessageBox.Show("Schedule Has Been Saved");
-
-                }
-                else if (count == rowToInsert)
-                {
-                    DateTimeOffset selectedDateTime = new DateTimeOffset(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month, dateTimePicker1.Value.Day, 0, 0, 0, TimeSpan.Zero);
-                    int Today_UNIX = (int)selectedDateTime.ToUnixTimeSeconds();
-                    refreshDataDisplay(Today_UNIX);
-                }
-                count = count++;
-
-
-
-            }
+            saveData();
             MessageBox.Show("Schedule Has Been Saved");
 
 
@@ -111,6 +54,68 @@ namespace Room_Schedule
             refreshDataDisplay(Today_UNIX);
 
 
+        }
+
+        public void saveData()
+        {
+            SQLiteConnection m_dbConnection;
+            m_dbConnection = new SQLiteConnection("Data Source=room_schedule.db;Version=3;");
+            m_dbConnection.Open();
+            var dataInsert = new SQLiteCommand(m_dbConnection);
+            int count = 0;
+            int rowToInsert = schedule_nice.Rows.Count;
+            foreach (DataRow newData in schedule_nice.Rows)
+            {
+
+                string sDate = newData["Date"].ToString();
+                string sRoom = newData["PT-1"].ToString();
+                string sTime = newData["Time"].ToString();
+                int insert_UNIX;
+
+                try
+                {
+                    DateTime dt = Convert.ToDateTime(sDate);
+                    DateTimeOffset insertDateTime = new DateTimeOffset(dt.Year, dt.Month, dt.Day, 0, 0, 0, TimeSpan.Zero);
+                    insert_UNIX = (int)insertDateTime.ToUnixTimeSeconds();
+                }
+                catch
+                {
+                    MessageBox.Show("Please enter a Valid Date in the form of MM/DD/YY Please check the following record Date:" + sDate + " Room:" + sRoom + " Time:" + sTime);
+                    dataGridView1.DataSource = schedule_nice;
+                    dataGridView1.AutoGenerateColumns = false;
+                    dataGridView1.Columns["Index"].Visible = false;
+                    break;
+                }
+
+                string indexValue = newData["Index"].ToString();
+                int indexLength = indexValue.Length;
+                if (indexLength.Equals(0))
+                {
+
+                    dataInsert.CommandText = "Insert INTO Room_Schedule (ScheduleDate,ScheduleTime,'PT-1','PT-2','PT-3','PT-IP','RT','IS-CPT') VALUES ('" + insert_UNIX + "','" + newData["Time"] + "','" + newData["PT-1"] + "','" + newData["PT-2"] + "','" + newData["PT-3"] + "','" + newData["PT-IP"] + "','" + newData["RT"] + "','" + newData["IS-CPT"] + "');";
+                    dataInsert.ExecuteNonQuery();
+                    //MessageBox.Show("Schedule Has Been Saved");
+
+                }
+                else if (indexLength > 0)
+                {
+                    int indexNumber = Convert.ToInt32(newData["Index"]);
+                    dataInsert.CommandText = "Update Room_Schedule Set ScheduleDate ='" + insert_UNIX + "', ScheduleTime='" + newData["Time"] + "','PT-1'='" + newData["PT-1"] + "', 'PT-2'='" + newData["PT-2"] + "','PT-3'='" + newData["PT-3"] + "','PT-IP'='" + newData["PT-IP"] + "',RT='" + newData["RT"] + "','IS-CPT'='" + newData["IS-CPT"] + "' Where ScheduleDate = '" + insert_UNIX + "' and ScheduleTime ='" + newData["Time"] + "';";
+                    dataInsert.ExecuteNonQuery();
+                    //MessageBox.Show("Schedule Has Been Saved");
+
+                }
+                else if (count == rowToInsert)
+                {
+                    DateTimeOffset selectedDateTime = new DateTimeOffset(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month, dateTimePicker1.Value.Day, 0, 0, 0, TimeSpan.Zero);
+                    int Today_UNIX = (int)selectedDateTime.ToUnixTimeSeconds();
+                    refreshDataDisplay(Today_UNIX);
+                }
+                count = count++;
+
+
+
+            }
         }
 
         public void initializeDataTable()
@@ -319,10 +324,10 @@ namespace Room_Schedule
 
         private void button2_Click(object sender, EventArgs e)
         {
-            //printDocument1.Print();
-            //initializePrintTable();
+            saveData();
             try
             {
+
                 DateTimeOffset selectedDateTime = new DateTimeOffset(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month, dateTimePicker1.Value.Day, 0, 0, 0, TimeSpan.Zero);
                 int Print_UNIX = (int)selectedDateTime.ToUnixTimeSeconds();
                 printDataDisplay(Print_UNIX);
