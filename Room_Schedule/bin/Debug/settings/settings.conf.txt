@@ -1,0 +1,3 @@
+rooms = "PT-1","PT-2","PT-3","PT-IP","RT","IS-CPT"
+lpp = 25
+

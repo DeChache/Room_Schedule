@@ -20,7 +20,6 @@ E:\code\room_schedule\Room_Schedule\obj\Debug\Room_Schedule.Properties.Resources
 E:\code\room_schedule\Room_Schedule\obj\Debug\Room_Schedule.csproj.GenerateResource.Cache
 E:\code\room_schedule\Room_Schedule\bin\Debug\Room_Schedule.exe
 E:\code\room_schedule\Room_Schedule\bin\Debug\Room_Schedule.pdb
-E:\code\room_schedule\Room_Schedule\bin\Debug\System.Data.SQLite.pdb
 C:\Users\DeChache\Documents\dev_code\room_schedule\Room_Schedule\bin\Debug\Room_Schedule.exe.config
 C:\Users\DeChache\Documents\dev_code\room_schedule\Room_Schedule\obj\Debug\Room_Schedule.exe
 C:\Users\DeChache\Documents\dev_code\room_schedule\Room_Schedule\obj\Debug\Room_Schedule.pdb
@@ -90,3 +89,16 @@ C:\Users\johnscod_admin\Documents\code\Room_Schedule\Room_Schedule\obj\Debug\Roo
 C:\Users\johnscod_admin\Documents\code\Room_Schedule\Room_Schedule\obj\Debug\Room_Schedule.TrustInfo.xml
 C:\Users\johnscod_admin\Documents\code\Room_Schedule\Room_Schedule\obj\Debug\Room_Schedule.exe.manifest
 C:\Users\johnscod_admin\Documents\code\Room_Schedule\Room_Schedule\obj\Debug\Room_Schedule.application
+E:\code\Room_Schedule\Room_Schedule\bin\Debug\Room_Schedule.exe.manifest
+E:\code\Room_Schedule\Room_Schedule\bin\Debug\Room_Schedule.application
+E:\code\Room_Schedule\Room_Schedule\bin\Debug\EntityFramework.dll
+E:\code\Room_Schedule\Room_Schedule\bin\Debug\EntityFramework.SqlServer.dll
+E:\code\Room_Schedule\Room_Schedule\bin\Debug\System.Data.SQLite.dll
+E:\code\Room_Schedule\Room_Schedule\bin\Debug\System.Data.SQLite.EF6.dll
+E:\code\Room_Schedule\Room_Schedule\bin\Debug\System.Data.SQLite.Linq.dll
+E:\code\Room_Schedule\Room_Schedule\bin\Debug\EntityFramework.xml
+E:\code\Room_Schedule\Room_Schedule\bin\Debug\EntityFramework.SqlServer.xml
+E:\code\Room_Schedule\Room_Schedule\bin\Debug\System.Data.SQLite.xml
+E:\code\Room_Schedule\Room_Schedule\obj\Debug\Room_Schedule.TrustInfo.xml
+E:\code\Room_Schedule\Room_Schedule\obj\Debug\Room_Schedule.exe.manifest
+E:\code\Room_Schedule\Room_Schedule\obj\Debug\Room_Schedule.application

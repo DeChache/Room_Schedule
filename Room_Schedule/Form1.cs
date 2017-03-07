@@ -149,9 +149,9 @@ namespace Room_Schedule
                 String display_today = Today.Month + "/" + Today.Day + "/" + Today.Year;
 
                 int index = 0;
-                TimeSpan startTime = new TimeSpan(7,00,00);
+                TimeSpan startTime = new TimeSpan(6,30,00);
 
-                while (index < 41)
+                while (index < 42)
                 {
                     DateTime time = DateTime.Today.Add(startTime);
                     string displayTodayTime = time.ToString("hh:mm tt");
@@ -358,7 +358,7 @@ namespace Room_Schedule
             int iRow = 0;//Used as counter
             bool bFirstPage = false; //Used to check whether we are printing first page
             bool bNewPage = false;// Used to check whether we are printing a new page
-            int iHeaderHeight = 0; //Used for the header height
+            int iHeaderHeight = 15; //Used for the header height
             StringFormat strFormat; //Used to format the grid rows.
             ArrayList arrColumnLefts = new ArrayList();//Used to save left coordinates of columns
             ArrayList arrColumnWidths = new ArrayList();//Used to save column widths
@@ -404,7 +404,7 @@ namespace Room_Schedule
                // int iLeftMargin = e.MarginBounds.Left;
                 int iLeftMargin = 10;
                 //Set the top margin
-                int iTopMargin = e.MarginBounds.Top;
+                int iTopMargin = 20;
                 //Whether more pages have to print or not
                 bool bMorePagesToPrint = false;
                 int iTmpWidth = 0;
@@ -419,7 +419,7 @@ namespace Room_Schedule
                             ((double)e.MarginBounds.Width / (double)iTotalWidth))));
 
                         iHeaderHeight = (int)(e.Graphics.MeasureString(GridCol.HeaderText,
-                            GridCol.InheritedStyle.Font, iTmpWidth).Height) + 11;
+                            GridCol.InheritedStyle.Font, iTmpWidth).Height) + 0;
 
                         // Save width and height of headers
                         iTmpWidth = 119;
@@ -433,10 +433,10 @@ namespace Room_Schedule
                 {
                     DataGridViewRow GridRow = gw.Rows[iRow];
                     //Set the cell height
-                    iCellHeight = GridRow.Height + 50;
+                    iCellHeight = GridRow.Height + 19;
                     int iCount = 0;
                     //Check whether the current page settings allows more rows to print
-                    if (iTopMargin + iCellHeight >= e.MarginBounds.Height + e.MarginBounds.Top)
+                    if (iTopMargin + iCellHeight >= 1210 - e.MarginBounds.Top) //e.MarginBounds.Height
                     {
                         bNewPage = true;
                         bFirstPage = false;
@@ -451,25 +451,26 @@ namespace Room_Schedule
                             //Draw Header
                             e.Graphics.DrawString(_ReportHeader,
                                 new Font(gw.Font, FontStyle.Bold),
-                                Brushes.Black, e.MarginBounds.Left,
-                                e.MarginBounds.Top - e.Graphics.MeasureString(_ReportHeader,
+                                Brushes.Black, 10,
+                                10 + e.Graphics.MeasureString(_ReportHeader, //Cody Mucked with
                                 new Font(gw.Font, FontStyle.Bold),
-                                e.MarginBounds.Width).Height - 13);
+                                0 ).Height - 10);
+                            //e.MarginBounds.Width).Height + 0);
 
                             String strDate = "";
                             //Draw Date
                             e.Graphics.DrawString(strDate,
                                 new Font(gw.Font, FontStyle.Bold), Brushes.Black,
                                 e.MarginBounds.Left +
-                                (e.MarginBounds.Width - e.Graphics.MeasureString(strDate,
+                                (e.MarginBounds.Width + e.Graphics.MeasureString(strDate,
                                 new Font(gw.Font, FontStyle.Bold),
                                 e.MarginBounds.Width).Width),
                                 e.MarginBounds.Top - e.Graphics.MeasureString(_ReportHeader,
                                 new Font(new Font(gw.Font, FontStyle.Bold),
-                                FontStyle.Bold), e.MarginBounds.Width).Height - 13);
+                                FontStyle.Bold), e.MarginBounds.Width).Height - 30);
 
                             //Draw Columns                 
-                            iTopMargin = e.MarginBounds.Top;
+                            iTopMargin = 30;
                             DataGridViewColumn[] _GridCol = new DataGridViewColumn[gw.Columns.Count];
                             int colcount = 0;
                             //Convert ltr to rtl
@@ -573,7 +574,11 @@ namespace Room_Schedule
 
         }
 
-
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Form2 frm = new Form2();
+            frm.Show();
+        }
     }
 
 
