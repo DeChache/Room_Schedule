@@ -36,6 +36,9 @@ namespace Room_Schedule
         {
             saveData();
             MessageBox.Show("Schedule Has Been Saved");
+            DateTimeOffset selectedDateTime = new DateTimeOffset(dateTimePicker1.Value.Year, dateTimePicker1.Value.Month, dateTimePicker1.Value.Day, 0, 0, 0, TimeSpan.Zero);
+            int Today_UNIX = (int)selectedDateTime.ToUnixTimeSeconds();
+            refreshDataDisplay(Today_UNIX);
 
 
 
@@ -129,6 +132,7 @@ namespace Room_Schedule
             schedule_nice.Columns.Add("PT-IP");
             schedule_nice.Columns.Add("RT");
             schedule_nice.Columns.Add("IS-CPT");
+            
         }
 
         public void refreshDataDisplay(int Date)
@@ -212,9 +216,25 @@ namespace Room_Schedule
             
 
                 dataGridView1.DataSource = schedule_nice;
+                dataGridView1.RowTemplate.MinimumHeight = 50;
                 dataGridView1.AutoGenerateColumns = false;
                 dataGridView1.Columns["Index"].Visible = false;
                 dataGridView1.Columns["Date"].Visible = false;
+                dataGridView1.Columns["Time"].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+                dataGridView1.Columns["Time"].Width = 75;               
+                dataGridView1.Columns["PT-1"].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+                dataGridView1.Columns["PT-1"].Width = 125;
+                dataGridView1.Columns["PT-2"].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+                dataGridView1.Columns["PT-2"].Width = 125;
+                dataGridView1.Columns["PT-3"].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+                dataGridView1.Columns["PT-3"].Width = 125;
+                dataGridView1.Columns["PT-IP"].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+                dataGridView1.Columns["PT-IP"].Width = 125;
+                dataGridView1.Columns["RT"].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+                dataGridView1.Columns["RT"].Width = 125;
+                dataGridView1.Columns["IS-CPT"].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+                dataGridView1.Columns["IS-CPT"].Width = 125;
+
 
 
         }
